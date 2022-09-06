@@ -2,10 +2,10 @@ public class Node {
     String data;
     Node nextNode;
     public Node next;
-    public Object prev;
+    public Node prev;
 
-    public Node (String data2){
-        this.data = data2;
+    public Node (String data){
+        this.data = data;
     }
 
     public Node(String s, Node cur) {

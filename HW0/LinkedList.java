@@ -79,30 +79,46 @@ public class LinkedList {
     }
     size++;
   }
-  //partly works. I can ID s at p, but i need to remove it from the list.
-  public String remove(int p) {
-    Node ref = head;
-    for (int i = 0; i < p; i++) {
-        ref = ref.next;
-    }
-    if (p == 0) {
-        head = ref.next;
-    } else {
-        ref.prev = ref.next;
-    }
-    return ref.getObject();
-}
-//fix this
-public boolean remove(String s){
-  if(count(s) >=1){
-    Node ref = head;
-    ref.prev = ref.next;
-    return true;
-  }
-  else{
-    return false;
-  }
-}
+//   //partly works. I can ID s at p, but i need to remove it from the list.
+//   public String remove(int p) {
+//     Node ref = head;
+//     for (int i = 0; i < p; i++) {
+//         ref = ref.next;
+//     }
+//     if (p == 0) {
+//         head = ref.next;
+//     } else {
+//         ref.prev = ref.next;
+//     }
+//     return ref.getObject();
+// }
+// //fix this
+// public boolean remove(String s){
+//   if(count(s) >=1){
+//     Node ref = head;
+//     ref.prev = ref.next;
+//     return true;
+//   }
+//   else{
+//     return false;
+//   }
+// }
 
+public void reverse() {  
+  //Node current will point to head  
+  Node current = head, temp = null;  
+
+  //Swap the previous and next pointers of each node to reverse the direction of the list  
+  while(current != null) {  
+      temp = current.next;  
+      current.next = current.prev;  
+      current.prev = temp;  
+      current = current.prev;  
+  }  
+  //Swap the head and tail pointers.  
+  temp = head;  
+  head = tail;  
+  tail = temp;  
+}  
 
 }

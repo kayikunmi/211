@@ -122,17 +122,15 @@ public class LinkedList {
     }
     return false;
   }
-  // public boolean removeAll(String s){
-    //this should be a summation of count(Sring s) and remove(String s)
-
-  // }
-  public void removeAll(String s) {
-    for (int i = 0; i < this.size; i++) {
-    this.remove(s);
-    i -= 1;
-    }
-    
-    }
+  public boolean removeAll(String s){
+    Node current = head;
+        while (current != null) {
+            if (current.data == s)
+            remove(s);
+            current = current.next;
+        }
+        return true;
+  }
 
   public boolean swap(int p, int q) {
     //check if the node is empty, make a temporary node, put the data in p to the temp node,

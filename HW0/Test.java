@@ -23,7 +23,8 @@ public class Test {
         //System.out.println("Remove at position q: " + list.remove(q));
         //System.out.println("Remove all: " + list.traverse()); //traverse works
         System.out.println("sawp: " + list.swap(q, p));
-        System.out.println("Swaped list: " + list.traverse()); //traverse works
+        System.out.println("Swaped list: " + list.traverse()); //swap works
+        System.out.println("Remove all: " + list.removeAll(s)); //traverse works
 
 
 

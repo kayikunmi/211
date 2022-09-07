@@ -81,29 +81,29 @@ public class LinkedList {
   }
   //partly works. I can ID s at p, but i need to remove it from the list.
   // im trying to access the data
-  public String remove(int p) {
-    Node ref = head;
-    Node temp = head;
-    Node prev = null;
-    for (int i = 0; i < p; i++) {
-        ref = ref.next;
-    }
-    // String v = ref.getData();
-    return ref.getObject();
-    String data = temp.getObject();
-    if (this.head != null && this.head.data == data) {
-      this.head = this.head.next;
-      return ref.getObject();
-  }
-  while (temp != null) {
-      if (temp.data == data) {
-          prev.next = temp.next;
-          return ref.getObject();
-      }
-      prev = temp;
-      temp = temp.next;
-  }
-}
+//   public String remove(int p) {
+//     Node ref = head;
+//     Node temp = head;
+//     Node prev = null;
+//     for (int i = 0; i < p; i++) {
+//         ref = ref.next;
+//     }
+//     // String v = ref.getData();
+//     return ref.getObject();
+//     //String data = temp.getObject();
+//     if (this.head != null && this.head.data == head.data) {
+//       this.head = this.head.next;
+//       return ref.getObject();
+//   }
+//   while (temp != null) {
+//       if (temp.data == head.data) {
+//           prev.next = temp.next;
+//           return ref.getObject();
+//       }
+//       prev = temp;
+//       temp = temp.next;
+//   }
+// }
 
   public boolean remove(String s) {
     Node temp = head;
@@ -125,10 +125,35 @@ public class LinkedList {
   // public boolean removeAll(String s){
 
   // }
+  public void removeAll(String s) {
+    for (int i = 0; i < this.size; i++) {
+    this.remove(s);
+    i -= 1;
+    }
+    
+    }
 
-  // public boolean swap(int p, int q){
-
-  // }
+  public boolean swap(int p, int q) {
+    Node temp = head;
+    if (this.head != null && this.head.data != null) {
+      while (temp != null) {
+        Node pNode = head;
+        for (int z = 0; z < p; z++) {
+          pNode = pNode.next;
+        }
+        Node qNode = head;
+        for (int y = 0; y < q; y++) {
+          qNode = qNode.next;
+        }
+        // Swap the data        
+        String data = pNode.data;
+        pNode.data = qNode.data;
+        qNode.data = data;
+        return true;
+      }
+    }
+    return false;  
+  }
 
   public void reverse() {
     Node prev = null;
@@ -142,4 +167,7 @@ public class LinkedList {
     head = prev;
   }
 
-}
+  
+}  
+
+

@@ -79,31 +79,16 @@ public class LinkedList {
     }
     size++;
   }
-  //partly works. I can ID s at p, but i need to remove it from the list.
-  // How can I remove this ref.getObject? call boolean remove(string s)?
-//   public String remove(int p) {
-//     Node ref = head;
-//     Node temp = head;
-//     Node prev = null;
-//     for (int i = 0; i < p; i++) {
-//         ref = ref.next;
-//     }
-//     // String v = ref.getData();
-//     return ref.getObject();
-//     //String data = temp.getObject();
-//     if (this.head != null && this.head.data == head.data) {
-//       this.head = this.head.next;
-//       return ref.getObject();
-//   }
-//   while (temp != null) {
-//       if (temp.data == head.data) {
-//           prev.next = temp.next;
-//           return ref.getObject();
-//       }
-//       prev = temp;
-//       temp = temp.next;
-//   }
-// }
+  
+  public String remove(int p) {
+    Node ref = head;
+    for (int i = 0; i < p; i++) {
+        ref = ref.next;
+    }
+    remove(ref.getObject());
+    return ref.getObject();
+  }
+
 
   public boolean remove(String s) {
     Node temp = head;
@@ -133,10 +118,8 @@ public class LinkedList {
   }
 
   public boolean swap(int p, int q) {
-    //check if the node is empty, make a temporary node, put the data in p to the temp node,
-    //then switch the data in q to the p node, then put the data now in temp into q node.
+    //i swapped the data, not nodes. FIX THIS
     Node temp = head;
-    //check for empty node
     if (this.head != null && this.head.data != null) {
       while (temp != null) {
         Node pNode = head;
@@ -146,8 +129,7 @@ public class LinkedList {
         Node qNode = head;
         for (int y = 0; y < q; y++) {
           qNode = qNode.next;
-        }
-        // Swap the data        
+        }      
         String data = pNode.data;
         pNode.data = qNode.data;
         qNode.data = data;
@@ -167,9 +149,7 @@ public class LinkedList {
         current = next;
     }
     head = prev;
-  }
-
-  
+  }  
 }  
 
 

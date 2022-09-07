@@ -1,6 +1,6 @@
 public class LinkedList {
 
-  static Node head;
+  Node head;
   Node tail;
   int size;
 
@@ -104,6 +104,24 @@ public class LinkedList {
 //   }
 // }
 
+public boolean remove(String x) {
+  Node temp = head;
+  Node prev = null;
+  if (this.head != null && this.head.data == x) {
+      this.head = this.head.next;
+      return true;
+  }
+  while (temp != null) {
+      if (temp.data == x) {
+          prev.next = temp.next;
+          return true;
+      }
+      prev = temp;
+      temp = temp.next;
+  }
+  return false;
+}
+
 public void reverse() {
   Node prev = null;
   Node current = head;
@@ -113,7 +131,7 @@ public void reverse() {
       prev = current;
       current = next;
   }
-  LinkedList.head = prev;
+  head = prev;
 }
 
 }

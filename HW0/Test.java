@@ -17,6 +17,8 @@ public class Test {
         list.add(s, p);
         System.out.println("The list after adding at 3: " + list.traverse());//add(s,p) works
         System.out.println("Count of 's': " + list.count(s));
+        System.out.println("Remove k: " + list.remove(k));
+
         list.reverse();
         System.out.println("The reversed list: " + list.traverse());
         // System.out.println("Remove at p: " + list.remove(2)); //rn, it correctly ids what is at p, but doesn't remove it

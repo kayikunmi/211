@@ -45,13 +45,13 @@ public class LinkedList {
         return count;
   }
 
-  void add(String s, int p) {     
+  public void add(String s, int p) {     
     Node newNode = new Node(s); 
     newNode.data = s;
     newNode.next = null;
     newNode.prev = null;
     if(p < 1) {
-      System.out.print("\np should be >= 1.");
+      System.out.println("Error: p should be >= 1.");
     } 
     else if (p == 1) {
       newNode.next = head;
@@ -74,64 +74,72 @@ public class LinkedList {
           newNode.next.prev = newNode;
       } 
       else {
-        System.out.print("\nThe previous node is null.");
+        System.out.println("Error: The previous node is null.");
       }       
     }
     size++;
   }
-//   //partly works. I can ID s at p, but i need to remove it from the list.
-//   public String remove(int p) {
-//     Node ref = head;
-//     for (int i = 0; i < p; i++) {
-//         ref = ref.next;
-//     }
-//     if (p == 0) {
-//         head = ref.next;
-//     } else {
-//         ref.prev = ref.next;
-//     }
-//     return ref.getObject();
-// }
-// //fix this
-// public boolean remove(String s){
-//   if(count(s) >=1){
-//     Node ref = head;
-//     ref.prev = ref.next;
-//     return true;
-//   }
-//   else{
-//     return false;
-//   }
-// }
-
-public boolean remove(String x) {
-  Node temp = head;
-  Node prev = null;
-  if (this.head != null && this.head.data == x) {
+  //partly works. I can ID s at p, but i need to remove it from the list.
+  // im trying to access the data
+  public String remove(int p) {
+    Node ref = head;
+    Node temp = head;
+    Node prev = null;
+    for (int i = 0; i < p; i++) {
+        ref = ref.next;
+    }
+    // String v = ref.getData();
+    return ref.getObject();
+    String data = temp.getObject();
+    if (this.head != null && this.head.data == data) {
       this.head = this.head.next;
-      return true;
+      return ref.getObject();
   }
   while (temp != null) {
-      if (temp.data == x) {
+      if (temp.data == data) {
           prev.next = temp.next;
-          return true;
+          return ref.getObject();
       }
       prev = temp;
       temp = temp.next;
   }
-  return false;
 }
 
-public void reverse() {
-  Node prev = null;
-  Node current = head;
-  while (current != null) {
-      Node next = current.getNext();
-      current.setNext(prev);
-      prev = current;
-      current = next;
+  public boolean remove(String s) {
+    Node temp = head;
+    Node prev = null;
+    if (this.head != null && this.head.data == s) {
+        this.head = this.head.next;
+        return true;
+    }
+    while (temp != null) {
+        if (temp.data == s) {
+            prev.next = temp.next;
+            return true;
+        }
+        prev = temp;
+        temp = temp.next;
+    }
+    return false;
   }
-  head = prev;
-}
+  // public boolean removeAll(String s){
+
+  // }
+
+  // public boolean swap(int p, int q){
+
+  // }
+
+  public void reverse() {
+    Node prev = null;
+    Node current = head;
+    while (current != null) {
+        Node next = current.getNext();
+        current.setNext(prev);
+        prev = current;
+        current = next;
+    }
+    head = prev;
+  }
 
 }

@@ -21,12 +21,16 @@ public class Test {
         System.out.println("The list after adding at 3: " + list.traverse());//add(s,p) works
         System.out.println("Count of 's': " + list.count(s));
         System.out.println("Remove k: " + list.remove(k));
-        System.out.println("The traversered list: " + list.traverse()); //traverse works
+        // list.swapNodes(p, q);
+        // System.out.println("swapnodes: " + list.traverse());
+        System.out.println("list without k: " + list.traverse()); //traverse works
         System.out.println("sawp: " + list.swap(q, p));
         System.out.println("Swaped list: " + list.traverse()); //swap works
         System.out.println("Remove all: " + list.removeAll(s)); //traverse works
         System.out.println("Remove at q: " + list.remove(q)); //traverse works
+        
         list.reverse();
+        
         System.out.println("The reversed list: " + list.traverse());
     }
 

@@ -124,12 +124,12 @@ public class LinkedList {
       while (temp != null) {
         Node pNode = head;
         for (int z = 0; z < p; z++) {
-          pNode = pNode.next;
+          pNode = pNode.next; 
         }
         Node qNode = head;
         for (int y = 0; y < q; y++) {
           qNode = qNode.next;
-        }      
+        }
         String data = pNode.data;
         pNode.data = qNode.data;
         qNode.data = data;
@@ -149,7 +149,36 @@ public class LinkedList {
         current = next;
     }
     head = prev;
-  }  
+  }
+  
+  // public void swapNodes(int x, int y)
+  //   {
+  //       if (x == y)
+  //           return;
+  //       Node prevX = null, currX = head;
+  //       while (currX != null && currX.data != x) {
+  //           prevX = currX;
+  //           currX = currX.next;
+  //       }
+  //       Node prevY = null, currY = head;
+  //       while (currY != null && currY.data != y) {
+  //           prevY = currY;
+  //           currY = currY.next;
+  //       }
+  //       if (currX == null || currY == null)
+  //           return;
+  //       if (prevX != null)
+  //           prevX.next = currY;
+  //       else 
+  //           head = currY;
+  //       if (prevY != null)
+  //           prevY.next = currX;
+  //       else 
+  //           head = currX;
+  //       Node temp = currX.next;
+  //       currX.next = currY.next;
+  //       currY.next = temp;
+  //   }
 }  
 
 

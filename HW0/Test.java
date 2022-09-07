@@ -1,13 +1,17 @@
 public class Test {
     public static void main (String [] args){
         String s = "s";
+        String r = "r";
+        String k = "k";
+        String a = "a";
+        String t = "t";
         int p = 3;
         LinkedList list = new LinkedList();
         list.add(s);
-        list.add("r");
-        list.add("t");
-        list.add("k");
-        list.add("y");//add(s) works
+        list.add(t);
+        list.add(a);
+        list.add(r);
+        list.add(k);//add(s) works
         System.out.println("The traversered list: " + list.traverse()); //traverse works
         System.out.println("Count of 's': " + list.count(s));//count(s) works
         list.add(s, p);

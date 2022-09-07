@@ -105,20 +105,14 @@ public class LinkedList {
 // }
 
 public void reverse() {  
-  Node temp=head; //swap head and tail
-  head=tail; // head now points to tail
-  tail=temp; //tail points to head
-   //traverse the list swapping prev and next fields of each node
-   Node p=head; //create a node and point to head
+  Node pointer = head; 
+  Node previous = null, current = null; 
+  while (pointer != null) { 
+    current = pointer; pointer = pointer.next; 
+    // reverse the link current.next = previous; previous = current; head = current; 
+  }
 
-   while(p!=null)
-   { 
-       temp=p.next; 
-       p.next=p.prev; 
-       p.prev=temp; 
-       p=p.next;
-   
-}
+
 }  
 
 }

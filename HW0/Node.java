@@ -21,4 +21,12 @@ public class Node {
     public String getObject() {
         return data;
     }
+
+    // public void displayData(){
+    //     System.out.print(data + " ");
+    //    }
+
+    public Node getPrev() {
+        return next;
+    }
 }

@@ -134,7 +134,10 @@ public class LinkedList {
     }
 
   public boolean swap(int p, int q) {
+    //check if the node is empty, make a temporary node, put the data in p to the temp node,
+    //then switch the data in q to the p node, then put the data now in temp into q node.
     Node temp = head;
+    //check for empty node
     if (this.head != null && this.head.data != null) {
       while (temp != null) {
         Node pNode = head;

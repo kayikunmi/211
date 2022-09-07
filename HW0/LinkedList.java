@@ -104,15 +104,16 @@ public class LinkedList {
 //   }
 // }
 
-public void reverse() {  
-  Node pointer = head; 
-  Node previous = null, current = null; 
-  while (pointer != null) { 
-    current = pointer; pointer = pointer.next; 
-    // reverse the link current.next = previous; previous = current; head = current; 
+public void reverse() {
+  Node prev = null;
+  Node current = head;
+  while (current != null) {
+      Node next = current.getNext();
+      current.setNext(prev);
+      prev = current;
+      current = next;
   }
-
-
-}  
+  LinkedList.head = prev;
+}
 
 }

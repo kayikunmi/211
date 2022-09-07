@@ -21,7 +21,7 @@ public class Test {
         System.out.println("Remove k: " + list.remove(k));
         System.out.println("The traversered list: " + list.traverse()); //traverse works
         //System.out.println("Remove at position q: " + list.remove(q));
-        System.out.println("Remove all: " + list.traverse()); //traverse works
+        //System.out.println("Remove all: " + list.traverse()); //traverse works
         System.out.println("sawp: " + list.swap(q, p));
         System.out.println("Swaped list: " + list.traverse()); //traverse works
 

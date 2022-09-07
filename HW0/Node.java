@@ -22,10 +22,6 @@ public class Node {
         return data;
     }
 
-    // public void displayData(){
-    //     System.out.print(data + " ");
-    //    }
-
     public Node getPrev() {
         return next;
     }

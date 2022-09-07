@@ -80,7 +80,7 @@ public class LinkedList {
     size++;
   }
   //partly works. I can ID s at p, but i need to remove it from the list.
-  // im trying to access the data
+  // How can I remove this ref.getObject? call boolean remove(string s)?
 //   public String remove(int p) {
 //     Node ref = head;
 //     Node temp = head;
@@ -123,6 +123,7 @@ public class LinkedList {
     return false;
   }
   // public boolean removeAll(String s){
+    //this should be a summation of count(Sring s) and remove(String s)
 
   // }
   public void removeAll(String s) {

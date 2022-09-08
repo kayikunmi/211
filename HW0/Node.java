@@ -1,6 +1,7 @@
 public class Node {
     String data;
     Node nextNode;
+    Node prevNode;
     public Node next;
     public Node prev;
 
@@ -23,11 +24,13 @@ public class Node {
     }
 
     public Node getPrev() {
-        return next;
+        return prev;
     }
     public void setNext(Node nextNode) {
         this.next = nextNode;
     }
-    
+    public void setPrev(Node nextNode) {
+        this.next = prevNode;
+    }
     
 }

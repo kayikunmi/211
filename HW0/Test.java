@@ -8,7 +8,7 @@ public class Test {
         String y = "y";
         String m = "m";
         int p = 1;
-        int q = 5;
+        int q = 4;
         LinkedList list = new LinkedList();
         list.add(s);
         list.add(t);

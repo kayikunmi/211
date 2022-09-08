@@ -126,29 +126,65 @@ public class LinkedList {
         for (int z = 0; z < p; z++) {
           nodep = nodep.next; 
         }
+        Node nodepPrev = head;
+        for (int z = 0; z < p-1; z++) {
+          nodepPrev = nodepPrev.next; 
+        }
         Node nodeq = head;
         for (int y = 0; y < q; y++) {
           nodeq = nodeq.next;
         }
-        String data = nodep.data;
-        nodep.data = nodeq.data;
-        nodeq.data = data;
-        // System.out.println("node: " + nodep.data);
-        // Node pPrev = nodep.prev;
-        // System.out.println("test: " + pPrev.data);
-        // Node pNext = nodep.next;
-        // Node qNext = nodeq.next;
-        // Node qPrev = nodeq.prev;
-
-        // nodep.prev = pNext;
-        // nodep.next = qNext;
-        // nodeq.prev = pPrev;
-        // nodeq.next = qPrev;
+        // String data = nodep.data;
+        // nodep.data = nodeq.data;
+        // nodeq.data = data;
         
-        // // pPrev.next = nodeq;
-        // // pNext.prev = nodeq;
-        // // pNext.next = nodep;
-        // // qNext.prev = nodep;
+
+        Node pPrev = nodepPrev; //s
+        //System.out.println(pPrev.data);
+        //System.out.println(nodep.data);//t
+        Node pNext = nodep.next;//a
+        //System.out.println(pNext.data);
+        Node pNextNext = nodep.next.next;
+        //System.out.println(pNextNext.data);
+        Node qPrev = nodeq.prev; //m
+        //System.out.println(qPrev.data);
+        //System.out.println(nodeq.data);//y
+        Node qNext = nodeq.next; //e
+      //System.out.println(head.data);
+Node tp = nodep;
+nodeq.next = nodep.next;
+      head.next = nodeq;
+      //nodep.prev = head;
+      //nodep.next = 
+
+        
+        
+
+        
+
+
+
+        //Node tempPrev = qPrev;
+        // Node pPrevNext = null; 
+        // pPrevNext = pPrev.next;//y
+        // pPrev.next = nodeq;
+        
+        
+        // qPrev = pPrev;
+
+        
+
+        
+      
+
+        // nodeq.prev.next = nodep;
+        // nodeq.next.prev = nodep;
+        // nodepPrev.next = nodeq;
+        // nodep.next.prev = nodeq;
+
+      
+        // System.out.println("prev: " + qPrev.data);
+      
         
 
         return true;

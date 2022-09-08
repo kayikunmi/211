@@ -80,14 +80,14 @@ public class LinkedList {
     size++;
   }
   
-  public String remove(int p) {
-    Node ref = head;
-    for (int i = 0; i < p; i++) {
-        ref = ref.next;
-    }
-    remove(ref.getObject());
-    return ref.getObject();
-  }
+  // public String remove(int p) {
+  //   Node ref = head;
+  //   for (int i = 0; i < p; i++) {
+  //       ref = ref.next;
+  //   }
+  //   remove(ref.getObject());
+  //   return ref.getObject();
+  // }
 
 
   public boolean remove(String s) {
@@ -122,17 +122,37 @@ public class LinkedList {
     Node temp = head;
     if (this.head != null && this.head.data != null) {
       while (temp != null) {
-        Node pNode = head;
+        Node nodep = head;
         for (int z = 0; z < p; z++) {
-          pNode = pNode.next; 
+          nodep = nodep.next; 
         }
-        Node qNode = head;
+        Node nodeq = head;
         for (int y = 0; y < q; y++) {
-          qNode = qNode.next;
+          nodeq = nodeq.next;
         }
-        String data = pNode.data;
-        pNode.data = qNode.data;
-        qNode.data = data;
+        // String data = nodep.data;
+        // nodep.data = nodeq.data;
+        // nodeq.data = data;
+
+        Node pPrev = nodep.prev;
+        Node pNext = nodep.next;
+        Node qNext = nodeq.next;
+        Node qPrev = nodeq.prev;
+
+        nodep.prev = pNext;
+        nodep.next = qNext;
+        nodeq.prev = pPrev;
+        nodeq.next = qPrev;
+        
+        // pPrev.next = nodeq;
+        // pNext.prev = nodeq;
+        // pNext.next = nodep;
+        // qNext.prev = nodep;
+        
+
+
+
+
         return true;
       }
     }
@@ -150,35 +170,11 @@ public class LinkedList {
     }
     head = prev;
   }
+
+
+
   
-  // public void swapNodes(int x, int y)
-  //   {
-  //       if (x == y)
-  //           return;
-  //       Node prevX = null, currX = head;
-  //       while (currX != null && currX.data != x) {
-  //           prevX = currX;
-  //           currX = currX.next;
-  //       }
-  //       Node prevY = null, currY = head;
-  //       while (currY != null && currY.data != y) {
-  //           prevY = currY;
-  //           currY = currY.next;
-  //       }
-  //       if (currX == null || currY == null)
-  //           return;
-  //       if (prevX != null)
-  //           prevX.next = currY;
-  //       else 
-  //           head = currY;
-  //       if (prevY != null)
-  //           prevY.next = currX;
-  //       else 
-  //           head = currX;
-  //       Node temp = currX.next;
-  //       currX.next = currY.next;
-  //       currY.next = temp;
-  //   }
+
 }  
 
 

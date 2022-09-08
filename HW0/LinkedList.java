@@ -149,6 +149,7 @@ public class LinkedList {
         Node qPrev = nodeq.prev; //m
         //System.out.println(qPrev.data);
         //System.out.println(nodeq.data);//y
+        ////
         Node qNext = nodeq.next; //e
       //System.out.println(head.data);
 Node tp = nodep;

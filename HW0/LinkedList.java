@@ -130,28 +130,26 @@ public class LinkedList {
         for (int y = 0; y < q; y++) {
           nodeq = nodeq.next;
         }
-        // String data = nodep.data;
-        // nodep.data = nodeq.data;
-        // nodeq.data = data;
+        String data = nodep.data;
+        nodep.data = nodeq.data;
+        nodeq.data = data;
+        // System.out.println("node: " + nodep.data);
+        // Node pPrev = nodep.prev;
+        // System.out.println("test: " + pPrev.data);
+        // Node pNext = nodep.next;
+        // Node qNext = nodeq.next;
+        // Node qPrev = nodeq.prev;
 
-        Node pPrev = nodep.prev;
-        Node pNext = nodep.next;
-        Node qNext = nodeq.next;
-        Node qPrev = nodeq.prev;
-
-        nodep.prev = pNext;
-        nodep.next = qNext;
-        nodeq.prev = pPrev;
-        nodeq.next = qPrev;
+        // nodep.prev = pNext;
+        // nodep.next = qNext;
+        // nodeq.prev = pPrev;
+        // nodeq.next = qPrev;
         
-        // pPrev.next = nodeq;
-        // pNext.prev = nodeq;
-        // pNext.next = nodep;
-        // qNext.prev = nodep;
+        // // pPrev.next = nodeq;
+        // // pNext.prev = nodeq;
+        // // pNext.next = nodep;
+        // // qNext.prev = nodep;
         
-
-
-
 
         return true;
       }
@@ -171,9 +169,56 @@ public class LinkedList {
     head = prev;
   }
 
+  // public void swap(int a, int b) {
+  //       Node temp = head;
+  //       if (this.head != null && this.head.data != null) {
+  //           while (temp != null) {
+  //             Node nodep = head;
+  //             for (int z = 0; z < a; z++) {
+  //               nodep = nodep.next; 
+  //               System.out.print(nodep.data);
+  //             }
+  //             Node nodeq = head;
+  //             for (int y = 0; y < b; y++) {
+  //               nodeq = nodeq.next;
+  //             }
+
+  //   if (nodep.next == nodeq) { // right next to each other
+  //       nodep.next = nodeq.next;
+  //       nodeq.prev = nodep.prev;
+
+  //       if (nodep.next != null)
+  //       nodep.next.prev = nodep;
+
+  //       if (nodeq.prev != null)
+  //       nodeq.prev.next = nodeq;
 
 
-  
+  //           nodeq.next = nodep;
+  //           nodeq.prev = nodep;
+  //   } else {
+  //       Node p = nodeq.prev;
+  //       Node n = nodeq.next;
+
+  //       nodeq.prev = nodep.prev;
+  //       nodeq.next = nodep.next;
+
+  //       nodep.prev = p;
+  //       nodep.next = n;
+
+  //       if (nodeq.next != null)
+  //       nodeq.next.prev = nodeq;
+  //       if (nodeq.prev != null)
+  //       nodeq.prev.next = nodeq;
+
+  //       if (nodep.next != null)
+  //       nodep.next.prev = nodep;
+  //       if (nodep.prev != null)
+  //       nodep.prev.next = nodep;
+
+  //   }
+
+  //           }}}
 
 }  
 

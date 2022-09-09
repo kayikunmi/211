@@ -5,7 +5,8 @@ public class LinkedList {
   int size;
 
   public void add(String new_data){
-    Node new_node = new Node(new_data);
+    Node newNode = new Node(new_data);
+
     //If the Linked List is empty, then make the new node the head 
     if (head == null){
       head = new Node(new_data);
@@ -14,11 +15,11 @@ public class LinkedList {
     }
     //Else, traverse to find the last node, add the data and change to the new tail
     else{
-      new_node.next = null;
+      newNode.next = null;
       Node last = head;
       while (last.next != null)
         last = last.next;
-        last.next = new_node;
+        last.next = newNode;
         size++;
         return;
     }

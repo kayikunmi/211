@@ -1,3 +1,4 @@
+//Kayikunmi- Node.java
 public class Node {
     String data;
     Node nextNode;
@@ -29,8 +30,8 @@ public class Node {
     public void setNext(Node nextNode) {
         this.next = nextNode;
     }
-    public void setPrev(Node nextNode) {
-        this.next = prevNode;
+    public void setPrev(Node prevNode) {
+        this.prev = prevNode;
     }
     
 }

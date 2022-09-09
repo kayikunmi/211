@@ -1,5 +1,5 @@
 //Kayikunmi- Tester.java
-public class Test {
+public class Tester {
     public static void main (String [] args){
         String s = "s";
         String r = "r";
@@ -27,7 +27,7 @@ public class Test {
         System.out.println("list: " + list.traverse()); //traverse works
         System.out.println("sawp: " + list.swap(p,q));
         list.swap(p,q);
-        System.out.println("Swaped list: " + list.traverse()); //swap works
+        System.out.println("Swaped list: " + list.traverse()); //swap not working becuase of add(s)
        System.out.println("Remove all: " + list.removeAll(s)); //traverse works
         System.out.println("Remove at q: " + list.remove(q)); //traverse works
         

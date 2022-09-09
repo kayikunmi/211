@@ -119,7 +119,7 @@ public class LinkedList {
 
   public boolean swap(int p, int q) {
     /*
-    Works, but can't access nodep.preev
+    Works, but can't access nodep.prev
     */
     Node temp = head;
     if (this.head != null && this.head.data != null) {

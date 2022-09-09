@@ -129,7 +129,7 @@ public class LinkedList {
           nodep = nodep.next;
         }
         //use this to try to get nodep.prev?
-        // it works, but doesn't??? i'm confused
+        // it works, but doesn't?? i'm confused
         Node nodepPrev = head;
         for (int z = 0; z < p-1; z++) {
           nodepPrev = nodepPrev.next;

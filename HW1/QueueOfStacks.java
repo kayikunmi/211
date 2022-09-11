@@ -21,7 +21,8 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     
     // ==========================================================================
     /** The stack in which the queue's elements will be stored. */
-    private AmhStack<E> _stack;
+    private AmhStack<E> s1;
+    private AmhStack<E> s2;
     // ==========================================================================
 
 
@@ -34,7 +35,8 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
 
 	// Specifically use a WrapperStack, which is a type of AmhStack, to
 	// store the elements.
-	_stack = new WrapperStack<E>();
+	s1 = new WrapperStack<E>();
+    s2 = new WrapperStack<E>();
 
     } // StackOfQueues ()
     // ==========================================================================
@@ -52,6 +54,17 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public void add (E element) throws IllegalStateException {
 
 	// TO DO
+    while (!s1.isEmpty()) {
+        s2.push(s1.pop());
+    }
+
+    // push item into the first stack
+    s1.push(element);
+
+    // Move all elements back to the first stack from the second stack
+    while (!s2.isEmpty()) {
+        s1.push(s2.pop());
+    }
 	
     } // add ()
     // ==========================================================================
@@ -68,6 +81,14 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public E remove () throws NoSuchElementException {
 
 	// TO DO
+    if (s1.isEmpty())
+    {
+        System.out.println("Underflow!!");
+        System.exit(0);
+    }
+
+    // return the top item from the first stack
+    return s1.pop();
 	
     } // remove ()
     // ==========================================================================
@@ -78,6 +99,12 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public E peek () throws NoSuchElementException {
 
 	// TO DO
+    if (s1.isEmpty()) {
+        throw new NoSuchElementException("Queue underflow");
+    }
+    else {
+        return s1.peek();
+    }
 
     } // peek ()
     // ==========================================================================
@@ -88,6 +115,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public int size () {
 
 	// TO DO
+    return s1.size() + s2.size();
 	
     } // size ()
     // ==========================================================================

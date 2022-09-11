@@ -21,7 +21,8 @@ public class StackOfQueues <E> implements AmhStack <E> {
     
     // ==========================================================================
     /** The queue in which the stack's elements will be stored. */
-    private AmhQueue<E> _queue;
+    private AmhQueue<E> q1;
+    private AmhQueue<E> q2;
     // ==========================================================================
 
 
@@ -34,7 +35,8 @@ public class StackOfQueues <E> implements AmhStack <E> {
 
 	// Specifically use a WrapperQueue, which is a type of AmhQueue, to
 	// store the elements.
-	_queue = new WrapperQueue<E>();
+	q1 = new WrapperQueue<E>();
+    q2 = new WrapperQueue<E>();
 
     } // StackOfQueues ()
     // ==========================================================================
@@ -52,6 +54,19 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public void push (E element) throws IllegalStateException {
 
 	// TO DO
+    q2.add(element);
+ 
+            // Push all the remaining
+            // elements in q1 to q2.
+            while (q1.size() != 0) {
+                q2.add(q1.peek());
+                q1.remove();
+            }
+ 
+            // swap the names of two queues
+            AmhQueue<E> q = q1;
+            q1 = q2;
+            q2 = q;
 	
     } // push ()
     // ==========================================================================
@@ -68,6 +83,11 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public E pop () throws NoSuchElementException {
 
 	// TO DO
+    if (q1.size() == 0){
+        return q1.peek();
+    }
+    return q1.remove();
+        
 	
     } // pop ()
     // ==========================================================================
@@ -84,6 +104,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public E top () throws NoSuchElementException {
 
 	// TO DO
+            return q1.peek();
 	
     } // top ()
     // ==========================================================================
@@ -99,6 +120,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public int size () {
 
 	// TO DO
+    return q1.size();
 	
     } // size ()
     // ==========================================================================

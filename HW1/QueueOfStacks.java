@@ -54,7 +54,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public void add (E element) throws IllegalStateException {
 
 	// TO DO
-    while (!s1.isEmpty()) {
+    while (s1.size()!=0) {
         s2.push(s1.pop());
     }
 
@@ -62,7 +62,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     s1.push(element);
 
     // Move all elements back to the first stack from the second stack
-    while (!s2.isEmpty()) {
+    while (s2.size()!=0) {
         s1.push(s2.pop());
     }
 	
@@ -81,7 +81,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public E remove () throws NoSuchElementException {
 
 	// TO DO
-    if (s1.isEmpty())
+    if (s1.size()==0)
     {
         System.out.println("Underflow!!");
         System.exit(0);
@@ -99,11 +99,11 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public E peek () throws NoSuchElementException {
 
 	// TO DO
-    if (s1.isEmpty()) {
+    if (s1.size()==0) {
         throw new NoSuchElementException("Queue underflow");
     }
     else {
-        return s1.peek();
+        return s1.top();
     }
 
     } // peek ()

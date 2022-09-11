@@ -76,7 +76,9 @@ public class StackTester {
 			      testSuccess,
 			      referenceSuccess);
 	}
-	
+	if(testSuccess == referenceSuccess){
+		System.out.println("Successfully Pushed");
+	}
     } // push ()
     // ==========================================================================
 
@@ -122,7 +124,9 @@ public class StackTester {
 	    }
 
 	}
-	
+	if(testSuccess == referenceSuccess){
+		System.out.println("Successfully Popped");
+	}
     } // pop ()
     // ==========================================================================
 

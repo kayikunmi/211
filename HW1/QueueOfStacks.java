@@ -54,18 +54,14 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public void add (E element) throws IllegalStateException {
 
 	// TO DO
-    while (s1.size()!=0) {
-        s2.push(s1.pop());
-    }
+        while (s1.size()!=0) {
+            s2.push(s1.pop());
+        }
+        s1.push(element);
 
-    // push item into the first stack
-    s1.push(element);
-
-    // Move all elements back to the first stack from the second stack
-    while (s2.size()!=0) {
-        s1.push(s2.pop());
-    }
-	
+        while (s2.size()!=0) {
+            s1.push(s2.pop());
+        }
     } // add ()
     // ==========================================================================
 
@@ -81,15 +77,12 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public E remove () throws NoSuchElementException {
 
 	// TO DO
-    // if (s1.size()==0)
-    // {
-    //     System.out.println("Underflow!!");
-    //     System.exit(0);
-    // }
-
-    // return the top item from the first stack
-    return s1.pop();
-	
+        if (s1.size()==0) {
+            throw new NoSuchElementException("ERROR: Queue is Empty");
+        }
+        else {
+            return s1.pop();
+        }
     } // remove ()
     // ==========================================================================
 
@@ -99,13 +92,12 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public E peek () throws NoSuchElementException {
 
 	// TO DO
-    if (s1.size()==0) {
-        throw new NoSuchElementException("Queue underflow");
-    }
-    else {
-        return s1.top();
-    }
-
+        if (s1.size()==0) {
+            throw new NoSuchElementException("ERROR: Queue is Empty");
+        }
+        else {
+            return s1.top();
+        }
     } // peek ()
     // ==========================================================================
 
@@ -115,7 +107,12 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public int size () {
 
 	// TO DO
-    return s1.size() + s2.size();
+        if (s1.size()==0) {
+            throw new NoSuchElementException("ERROR: Queue is Empty");
+        }
+        else {
+            return s1.size() + s2.size();
+        }
 	
     } // size ()
     // ==========================================================================

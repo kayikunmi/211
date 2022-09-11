@@ -54,19 +54,15 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public void push (E element) throws IllegalStateException {
 
 	// TO DO
-    q2.add(element);
- 
-            // Push all the remaining
-            // elements in q1 to q2.
-            while (q1.size() != 0) {
-                q2.add(q1.peek());
-                q1.remove();
-            }
- 
-            // swap the names of two queues
-            AmhQueue<E> q = q1;
-            q1 = q2;
-            q2 = q;
+    AmhQueue<E> q;
+        q2.add(element);
+        while (q1.size() != 0) {
+            q2.add(q1.peek());
+            q1.remove();
+        }
+        q = q1;
+        q1 = q2;
+        q2 = q;
 	
     } // push ()
     // ==========================================================================
@@ -83,12 +79,10 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public E pop () throws NoSuchElementException {
 
 	// TO DO
-    if (q1.size() == 0){
-        return q1.peek();
-    }
-    return q1.remove();
-        
-	
+        if (q1.size() == 0){
+            return q1.peek();
+        }
+        return q1.remove();
     } // pop ()
     // ==========================================================================
 
@@ -104,8 +98,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public E top () throws NoSuchElementException {
 
 	// TO DO
-            return q1.peek();
-	
+        return q1.peek();
     } // top ()
     // ==========================================================================
 
@@ -120,8 +113,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public int size () {
 
 	// TO DO
-    return q1.size();
-	
+        return q1.size();
     } // size ()
     // ==========================================================================
 

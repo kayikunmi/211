@@ -81,11 +81,11 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public E remove () throws NoSuchElementException {
 
 	// TO DO
-    if (s1.size()==0)
-    {
-        System.out.println("Underflow!!");
-        System.exit(0);
-    }
+    // if (s1.size()==0)
+    // {
+    //     System.out.println("Underflow!!");
+    //     System.exit(0);
+    // }
 
     // return the top item from the first stack
     return s1.pop();

@@ -76,6 +76,9 @@ public class QueueTester {
 			      testSuccess,
 			      referenceSuccess);
 	}
+	if(testSuccess == referenceSuccess){
+		System.out.println("Successfully Enqueued");
+	}
 	
     } // enqueue ()
     // ==========================================================================
@@ -112,7 +115,8 @@ public class QueueTester {
 	    System.err.printf("dequeue success mismatch: test = %b, ref = %b\n",
 			      testSuccess,
 			      referenceSuccess);
-	} else {
+	} 
+	else {
 
 	    // If they succeeded, did the values match?
 	    if (testSuccess && (testValue != referenceValue)) {
@@ -121,6 +125,9 @@ public class QueueTester {
 				  referenceValue);
 	    }
 
+	}
+	if(testSuccess == referenceSuccess){
+		System.out.println("Successfully Dequeued");
 	}
 	
     } // dequeue ()

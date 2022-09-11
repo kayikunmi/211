@@ -47,9 +47,9 @@ public class QueueTester {
 
 
     // ==========================================================================
-    private static void enqueue (AmhQueue<Integer> testQueue,
-				 AmhQueue<Integer> referenceQueue,
-				 Integer value) {
+    private static void enqueue (	AmhQueue<Integer> testQueue,
+				 					AmhQueue<Integer> referenceQueue,
+				 					Integer value) {
 
 	// Insert the value into the reference queue.
 	boolean referenceSuccess;

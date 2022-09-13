@@ -55,8 +55,11 @@ public class StackOfQueues <E> implements AmhStack <E> {
     public void push (E element) throws IllegalStateException {
 
 	// TO DO
-    AmhQueue<E> q;
+        AmhQueue<E> q;
+        //add the element to q2
         q2.add(element);
+        //if not empty, add to q2, then switch
+        //so the top is the element we're adding
         while (q1.size() != 0) {
             q2.add(q1.peek());
             q1.remove();

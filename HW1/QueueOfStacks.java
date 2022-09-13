@@ -55,6 +55,12 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public void add (E element) throws IllegalStateException {
 
 	// TO DO
+    /**
+     * Since we're adding to the the tail of the queue,
+     * we want to initially push all the elements currently in s1 into s2, using push
+     * then we add the element into s1,
+     * and finally pop s2 and push the rest of the elements into s1.
+     */
         while (s1.size()!=0) {
             s2.push(s1.pop());
         }
@@ -108,12 +114,8 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public int size () {
 
 	// TO DO
-        if (s1.size()==0) {
-            throw new NoSuchElementException("ERROR: Queue is Empty");
-        }
-        else {
-            return s1.size() + s2.size();
-        }
+        return s1.size() + s2.size();
+
 	
     } // size ()
     // ==========================================================================

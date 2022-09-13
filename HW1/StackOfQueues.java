@@ -23,7 +23,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
     // ==========================================================================
     /** The queue in which the stack's elements will be stored. */
     private AmhQueue<E> q1;
-    private AmhQueue<E> q2;
+    //private AmhQueue<E> q2;
     // ==========================================================================
 
 
@@ -37,7 +37,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
 	// Specifically use a WrapperQueue, which is a type of AmhQueue, to
 	// store the elements.
 	q1 = new WrapperQueue<E>();
-    q2 = new WrapperQueue<E>();
+    //q2 = new WrapperQueue<E>();
 
     } // StackOfQueues ()
     // ==========================================================================
@@ -56,6 +56,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
 
 	// TO DO
         AmhQueue<E> q;
+        AmhQueue<E> q2 = new WrapperQueue<E>();
         //add the element to q2
         q2.add(element);
         //if not empty, add to q2, then switch
@@ -84,7 +85,7 @@ public class StackOfQueues <E> implements AmhStack <E> {
 
 	// TO DO
         if (q1.size() == 0){
-            return q1.peek();
+            throw new NoSuchElementException("ERROR: Queue is Empty");
         }
         return q1.remove();
     } // pop ()

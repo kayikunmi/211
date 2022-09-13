@@ -23,7 +23,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     // ==========================================================================
     /** The stack in which the queue's elements will be stored. */
     private AmhStack<E> s1;
-    private AmhStack<E> s2;
+    //private AmhStack<E> s2;
     // ==========================================================================
 
 
@@ -37,7 +37,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
 	// Specifically use a WrapperStack, which is a type of AmhStack, to
 	// store the elements.
 	s1 = new WrapperStack<E>();
-    s2 = new WrapperStack<E>();
+    //s2 = new WrapperStack<E>();
 
     } // StackOfQueues ()
     // ==========================================================================
@@ -61,6 +61,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
      * then we add the element into s1,
      * and finally pop s2 and push the rest of the elements into s1.
      */
+        AmhStack<E> s2 = new WrapperStack<E>();
         while (s1.size()!=0) {
             s2.push(s1.pop());
         }
@@ -114,7 +115,7 @@ public class QueueOfStacks <E> implements AmhQueue <E> {
     public int size () {
 
 	// TO DO
-        return s1.size() + s2.size();
+        return s1.size();
 
 	
     } // size ()

@@ -92,7 +92,7 @@ public class ListTester {
         while (input.hasNext()) {
 
             // This call can be removed for less debugging output.
-            compare();
+            //compare();
 
             // Read the process the next instruction.
             line = line + 1;
@@ -347,30 +347,30 @@ public class ListTester {
 
 
     // ==========================================================================
-    private void compare () {
+    // private void compare () {
 
-        if (referenceList.size() != testList.size()) {
-            System.out.printf("<%d> size mismatch: ref = %d, test = %d\n",
-                              line,
-                              referenceList.size(),
-                              testList.size());
-            return;
-        }
+    //     if (referenceList.size() != testList.size()) {
+    //         System.out.printf("<%d> size mismatch: ref = %d, test = %d\n",
+    //                           line,
+    //                           referenceList.size(),
+    //                           testList.size());
+    //         return;
+    //     }
 
-        for (int i = 0; i < referenceList.size(); i = i + 1) {
-            int rv = referenceList.get(i);
-            int tv = testList.get(i);
-            System.out.printf("<%d> [%d]\t%d\t%d\t%s\n",
-                              line,
-                              i,
-                              rv,
-                              tv,
-                              rv != tv ? "***" : "");
-        }
+    //     for (int i = 0; i < referenceList.size(); i = i + 1) {
+    //         int rv = referenceList.get(i);
+    //         int tv = testList.get(i);
+    //         System.out.printf("<%d> [%d]\t%d\t%d\t%s\n",
+    //                           line,
+    //                           i,
+    //                           rv,
+    //                           tv,
+    //                           rv != tv ? "***" : "");
+    //     }
 
-        System.out.printf("-----\n\n");
+    //     System.out.printf("-----\n\n");
         
-    } // compare ()
+    // } // compare ()
     // ==========================================================================
     
 

@@ -74,8 +74,8 @@ public class AmhLinkedList <E> implements AmhList <E> {
 	    throw new IndexOutOfBoundsException(index);
 	}
 
-        Link<E> p = walk(index);
-        Link<E> n = new Link<E>();
+        Link<E> p = walk(index);//p is the link for the current node
+        Link<E> n = new Link<E>();//
         n.next      = p;
         n.prev      = p.prev;
         n.prev.next = n;
@@ -184,6 +184,7 @@ public class AmhLinkedList <E> implements AmhList <E> {
 
     // ==========================================================================
     private Link<E> walk (int index) {
+        //checks each node from head to index
 
         Link<E> current = head.next;
         for (int i = 0; i < index; i = i + 1) {

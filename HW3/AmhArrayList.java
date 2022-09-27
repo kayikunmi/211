@@ -16,9 +16,10 @@ public class AmhArrayList <E> implements AmhList <E> {
 	_size += 1;
 	if (_size >= _storage.length) {
 	    try {
-		expandCapacity();
-	    } catch (OutOfMemoryError e) {
-		throw new IllegalStateException("Allocation failed");
+			expandCapacity();
+	    } 
+		catch (OutOfMemoryError e) {
+			throw new IllegalStateException("Allocation failed");
 	    }
 	}
 	for (int i = _size - 1; i > index; i -= 1) {
@@ -60,11 +61,12 @@ public class AmhArrayList <E> implements AmhList <E> {
     } // size ()
 
     private void expandCapacity () {
-	Object[] newStorage = new Object[_storage.length * 2];
-	for (int i = 0; i < _storage.length; i += 1) {
-	    newStorage[i] = _storage[i];
-	}
-	_storage = newStorage;
+			Object[] newStorage = new Object[_storage.length * 2];
+			for (int i = 0; i < _storage.length; i += 1) {
+				newStorage[i] = _storage[i];
+			}
+			_storage = newStorage;
+		
     } // expandCapacity ()
 
 } // AmhArrayList

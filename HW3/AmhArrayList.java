@@ -61,6 +61,10 @@ public class AmhArrayList <E> implements AmhList <E> {
     } // size ()
 
     private void expandCapacity () {
+		if (_storage.length ==0){
+			Object[] changeStorage = new Object[2];
+			_storage = changeStorage;
+		}
 			Object[] newStorage = new Object[_storage.length * 2];
 			for (int i = 0; i < _storage.length; i += 1) {
 				newStorage[i] = _storage[i];

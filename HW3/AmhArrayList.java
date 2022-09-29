@@ -65,11 +65,11 @@ public class AmhArrayList <E> implements AmhList <E> {
 			Object[] changeStorage = new Object[2];
 			_storage = changeStorage;
 		}
-			Object[] newStorage = new Object[_storage.length * 2];
-			for (int i = 0; i < _storage.length; i += 1) {
-				newStorage[i] = _storage[i];
-			}
-			_storage = newStorage;
+		Object[] newStorage = new Object[_storage.length * 2];
+		for (int i = 0; i < _storage.length; i += 1) {
+			newStorage[i] = _storage[i];
+		}
+		_storage = newStorage;
 		
     } // expandCapacity ()
 

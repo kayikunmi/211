@@ -5,42 +5,34 @@ import java.lang.IllegalStateException;
 import java.util.LinkedList;
 // ==============================================================================
 
-
-
 // ==============================================================================
-class Link <E> {
+class Link<E> {
     public Link<E> next;
     public Link<E> prev;
-    public E       value;
+    public E value;
 }
 // ==============================================================================
-
-
 
 // ==============================================================================
 /**
  * Implement a simplified list using a standard <code>LinkedList</code>.
  *
  * @author Scott Kaplan -- sfkaplan@amherst.edu
- * @date   Mar 2021
+ * @date Mar 2021
  */
-public class AmhLinkedList <E> implements AmhList <E> {
-// ==============================================================================
+public class AmhLinkedList<E> implements AmhList<E> {
+    // ==============================================================================
 
-
-    
     // ==========================================================================
     private Link<E> head;
-    private int     size;
+    private int size;
     // ==========================================================================
 
-
-    
     // ==========================================================================
     /**
-     * Constructor.  Create an empty list.
+     * Constructor. Create an empty list.
      */
-    public AmhLinkedList () {
+    public AmhLinkedList() {
 
         head = new Link<E>();
         Link<E> tail = new Link<E>();
@@ -51,42 +43,51 @@ public class AmhLinkedList <E> implements AmhList <E> {
         size = 0;
 
     } // AmhLinkedList ()
-    // ==========================================================================
+      // ==========================================================================
 
-
-    
     // ==========================================================================
     /**
-     * Add an element to this list at the given, indexed position.  The index
+     * Add an element to this list at the given, indexed position. The index
      * must be in range, or must be immediately after the last valid index, thus
      * appending the value to the list.
      *
      * @param index   The position at which to insert the element.
      * @param element The element to add.
      * @throws IndexOutOfBoundsException if {@code index < 0 || size < index}
-     * @throws IllegalStateException  if the list cannot be expanded to
-     *                                accomodate the additional element.
+     * @throws IllegalStateException     if the list cannot be expanded to
+     *                                   accomodate the additional element.
      */
-    public void add (int index, E element) throws IndexOutOfBoundsException,
-						  IllegalStateException {
+    public void add(int index, E element) throws IndexOutOfBoundsException,
+            IllegalStateException {
 
-	if (index < 0 || size < index) {
-	    throw new IndexOutOfBoundsException(index);
-	}
+        if (index < 0 || size < index) {
+            throw new IndexOutOfBoundsException(index);
+        }
 
         Link<E> p = walk(index);
         Link<E> n = new Link<E>();
-        n.next      = p;
-        n.prev      = p.prev;
-        n.prev.next = n;
-        p.prev      = n;
+
+        if (index == 0) {
+            n.prev = null;
+            n.next = p;
+            p.prev = n;
+        }
+
+        else if (index == (size - 1)) {
+            n.next = null;
+            n.prev = p;
+            p.next = n;
+        } else {
+            n.next = p;
+            n.prev = p.prev;
+            n.prev.next = n;
+            p.prev = n;
+        }
 
         size = size + 1;
-        
-    } // add ()
-    // ==========================================================================
 
-    
+    } // add ()
+      // ==========================================================================
 
     // ==========================================================================
     /**
@@ -96,24 +97,22 @@ public class AmhLinkedList <E> implements AmhList <E> {
      * @return the value at the given position.
      * @throws IndexOutOfBoundsException if {@code index < 0 && size <= index}
      */
-    public E get (int index) throws IndexOutOfBoundsException {
+    public E get(int index) throws IndexOutOfBoundsException {
 
-	if (index < 0 || size <= index) {
-	    throw new IndexOutOfBoundsException(index);
-	}
+        if (index < 0 || size <= index) {
+            throw new IndexOutOfBoundsException(index);
+        }
 
         Link<E> p = walk(index);
 
         return p.value;
-        
+
     } // get ()
-    // ==========================================================================
-
-
+      // ==========================================================================
 
     // ==========================================================================
     /**
-     * Remove an element from the given, indexed position.  The list size is
+     * Remove an element from the given, indexed position. The list size is
      * decremented, with the elements in higher position sliding down to fill in
      * the gap.
      *
@@ -121,25 +120,29 @@ public class AmhLinkedList <E> implements AmhList <E> {
      * @return the removed element.
      * @throws IndexOutOfBoundsException if {@code index < 0 && size <= index}
      */
-    public E remove (int index) throws IndexOutOfBoundsException {
+    public E remove(int index) throws IndexOutOfBoundsException {
 
-	if (index < 0 || size < index) {
-	    throw new IndexOutOfBoundsException(index);
-	}
+        if (index < 0 || size < index) {
+            throw new IndexOutOfBoundsException(index);
+        }
 
-        Link<E> p     = walk(index);
-        E       value = p.value;
-        p.prev.next = p.next;
-        p.next.prev = p.prev;
+        Link<E> p = walk(index);
+        E value = p.value;
+        if (index == 0) {
+            p.next.prev = null;
+        } else if (index == (size - 1)) {
+            p.prev.next = null;
+        } else {
+            p.prev.next = p.next;
+            p.next.prev = p.prev;
+        }
 
         size = size - 1;
-        
-        return value;
-        
-    } // remove ()
-    // ==========================================================================
 
-    
+        return value;
+
+    } // remove ()
+      // ==========================================================================
 
     // ==========================================================================
     /**
@@ -150,22 +153,20 @@ public class AmhLinkedList <E> implements AmhList <E> {
      * @return the removed element previously at the given position.
      * @throws IndexOutOfBoundsException if {@code index < 0 && size <= index}
      */
-    public E set (int index, E element) throws IndexOutOfBoundsException {
+    public E set(int index, E element) throws IndexOutOfBoundsException {
 
-	if (index < 0 || size <= index) {
-	    throw new IndexOutOfBoundsException(index);
-	}
+        if (index < 0 || size <= index) {
+            throw new IndexOutOfBoundsException(index);
+        }
 
-        Link<E> p     = walk(index);
-        E       value = p.value;
+        Link<E> p = walk(index);
+        E value = p.value;
         p.value = element;
 
         return value;
-        
-    } // set ()
-    // ==========================================================================
 
-    
+    } // set ()
+      // ==========================================================================
 
     // ==========================================================================
     /**
@@ -173,17 +174,15 @@ public class AmhLinkedList <E> implements AmhList <E> {
      *
      * @return the length of the list.
      */
-    public int size () {
+    public int size() {
 
         return size;
-        
+
     } // size ()
-    // ==========================================================================
-
-
+      // ==========================================================================
 
     // ==========================================================================
-    private Link<E> walk (int index) {
+    private Link<E> walk(int index) {
 
         Link<E> current = head.next;
         for (int i = 0; i < index; i = i + 1) {
@@ -191,12 +190,10 @@ public class AmhLinkedList <E> implements AmhList <E> {
         }
 
         return current;
-        
+
     } // walk ()
-    // ==========================================================================
-    
+      // ==========================================================================
 
-
-// ==============================================================================
+    // ==============================================================================
 } // class AmhLinkedList
-// ==============================================================================
+  // ==============================================================================

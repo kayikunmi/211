@@ -40,8 +40,15 @@ public class AmhArrayList<E> implements AmhList<E> {
 			throw new IndexOutOfBoundsException(index);
 		}
 		_size -= 1;
-		E element = (E) _storage[index];
-		for (int i = index; i < _size; i -= 1) {
+		E element = (E) _storage[index];//i can't remove the last index
+		// if (index == _size){ //removing the last index?
+		// 	Object[] removeIndex = new Object[_size];
+		// 	for (int i = 0; i < _storage.length; i += 1) {
+		// 		removeIndex[i] = _storage[i];
+		// 	}
+		// 	_storage = removeIndex;
+		// }
+		for (int i = index; i < _size; i ++ ) {
 			_storage[i] = _storage[i + 1];
 		}
 		return element;

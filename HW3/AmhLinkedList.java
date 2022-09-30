@@ -66,25 +66,13 @@ public class AmhLinkedList<E> implements AmhList<E> {
 
         Link<E> p = walk(index);
         Link<E> n = new Link<E>();
+        n.value = element;
+        n.next = p;
+        n.prev = p.prev;
+        n.prev.next = n;
+        p.prev = n;
+        size++;
 
-        if (index == 0) {
-            n.prev = null;
-            n.next = p;
-            p.prev = n;
-        }
-
-        else if (index == (size - 1)) {
-            n.next = null;
-            n.prev = p;
-            p.next = n;
-        } else {
-            n.next = p;
-            n.prev = p.prev;
-            n.prev.next = n;
-            p.prev = n;
-        }
-
-        size = size + 1;
 
     } // add ()
       // ==========================================================================
@@ -102,16 +90,9 @@ public class AmhLinkedList<E> implements AmhList<E> {
         if (index < 0 || size <= index) {
             throw new IndexOutOfBoundsException(index);
         }
-
-        
-        // if ( index == 0){
-        //     Link<E> q = head;
-        //     return q.value;
-        // }
-        else{
             Link<E> p = walk(index);
             return p.value;
-        }
+        
         
 
     } // get ()
@@ -129,29 +110,17 @@ public class AmhLinkedList<E> implements AmhList<E> {
      */
     public E remove(int index) throws IndexOutOfBoundsException {
 
-        if (index <= 0 || size < index) {
+        if (index < 0 || size <= index) {
             throw new IndexOutOfBoundsException(index);
         }
 
         Link<E> p = walk(index);
-        
-        // if (index == 0) {
-        //     p.next.prev = null;
-        // } 
-        //rn, my code can't remove at the head. Lame
-
-        //else if (next line) 
-        if (index == (size - 1)) {
-            p.prev.next = null;
-        } 
-        else {
-            p.prev.next = p.next;
-            p.next.prev = p.prev;
-        }
-
-        size = size - 1;
-
         E value = p.value;
+        p.prev.next = p.next;
+        p.next.prev = p.prev;
+
+        size --;
+
         return value;
 
     } // remove ()
@@ -197,7 +166,7 @@ public class AmhLinkedList<E> implements AmhList<E> {
     // ==========================================================================
     private Link<E> walk(int index) {
 
-        Link<E> current = head;
+        Link<E> current = head.next;
         for (int i = 0; i < index; i = i + 1) {
             current = current.next;
         }

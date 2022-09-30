@@ -198,6 +198,9 @@ public class ListTester {
                     referenceResult,
                     testResult);
         }
+        // if (referenceResult == testResult) {
+        //     System.out.printf("Add passed");
+        // }
 
     } // add ()
       // ==========================================================================
@@ -232,6 +235,9 @@ public class ListTester {
                     referenceResult, referenceValue,
                     testResult, testValue);
         }
+        // if (referenceResult == testResult) {
+        //     System.out.printf("Remove passed");
+        // }
 
     } // remove ()
       // ==========================================================================
@@ -266,6 +272,9 @@ public class ListTester {
                     referenceResult, referenceValue,
                     testResult, testValue);
         }
+        // if (referenceResult == testResult) {
+        //     System.out.printf("Get passed");
+        // }
 
     } // get ()
       // ==========================================================================
@@ -300,6 +309,9 @@ public class ListTester {
                     referenceResult, referenceValue,
                     testResult, testValue);
         }
+        // if (referenceResult == testResult) {
+        //     //System.out.printf("Set passed");
+        // }
 
     } // set ()
       // ==========================================================================
@@ -320,6 +332,9 @@ public class ListTester {
                     referenceSize,
                     testSize);
         }
+        // if (referenceSize == testSize) {
+        //     //System.out.printf("Size passed");
+        // }
 
     } // size ()
       // ==========================================================================

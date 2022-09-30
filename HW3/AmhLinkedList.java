@@ -103,9 +103,16 @@ public class AmhLinkedList<E> implements AmhList<E> {
             throw new IndexOutOfBoundsException(index);
         }
 
-        Link<E> p = walk(index);
-
-        return p.value;
+        
+        // if ( index == 0){
+        //     Link<E> q = head;
+        //     return q.value;
+        // }
+        else{
+            Link<E> p = walk(index);
+            return p.value;
+        }
+        
 
     } // get ()
       // ==========================================================================
@@ -122,23 +129,29 @@ public class AmhLinkedList<E> implements AmhList<E> {
      */
     public E remove(int index) throws IndexOutOfBoundsException {
 
-        if (index < 0 || size < index) {
+        if (index <= 0 || size < index) {
             throw new IndexOutOfBoundsException(index);
         }
 
         Link<E> p = walk(index);
-        E value = p.value;
-        if (index == 0) {
-            p.next.prev = null;
-        } else if (index == (size - 1)) {
+        
+        // if (index == 0) {
+        //     p.next.prev = null;
+        // } 
+        //rn, my code can't remove at the head. Lame
+
+        //else if (next line) 
+        if (index == (size - 1)) {
             p.prev.next = null;
-        } else {
+        } 
+        else {
             p.prev.next = p.next;
             p.next.prev = p.prev;
         }
 
         size = size - 1;
 
+        E value = p.value;
         return value;
 
     } // remove ()
@@ -184,7 +197,7 @@ public class AmhLinkedList<E> implements AmhList<E> {
     // ==========================================================================
     private Link<E> walk(int index) {
 
-        Link<E> current = head.next;
+        Link<E> current = head;
         for (int i = 0; i < index; i = i + 1) {
             current = current.next;
         }

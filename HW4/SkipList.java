@@ -39,6 +39,19 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
 
         // add x after its predecessor on each level within x's height
         // YOU FILL IN THIS PART
+        int currentLevel = 0;
+        while(currentLevel != height){
+            //add this number where it belongs
+            //the number will go after the number that is at the top of the stack.
+            Node<E> addbefore = findAllPreds(x).peek();
+            //switch
+            Node <E> temp = addbefore.next;
+            addbefore.next = (Node<E>) x;
+            temp.prev = (Node<E>) x;
+
+            currentLevel ++;
+        }
+        // I think I have it, but the next step will be to do this on each level. How do I do this? and check it?
 
 
 
@@ -84,10 +97,66 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         // level on the bottom of the stack
         // YOU FILL IN THIS PART
 
+        /*start on highest level, check if each node is less than 'x'
+        if it is greater than x, stop and go to the lower level.
+        store that in the stack
+        */
+        // int highestLevel = height - 1;
+        // Node<E> check = head;
+        // Integer numx = (Integer) x;
+        // Integer numcheck = (Integer) check.data;
+        // for (int i = highestLevel; i >= 0; i --){    
+        //    while (numcheck.intValue() < numx.intValue()){
+        //         check = check.nextNodes[i]; //go to the next node
+        //    }
+        // }
+        // return null; // placeholder, CHANGE THIS to return the correct thing
+        Node<E> currNode = head;
+        Stack<Node<E>> stackOfPreds = new Stack<Node<E>>();
+        boolean found = false;
+        while (!found) {
+            //special case to return a node containing null - indicates value not in list
+            if (currNode == null) {
+                return stackOfPreds;
+            }
+            //We found it!
+            else if (currNode.getData().equals(x)) {
+                found = true;
+            }
+            //Go to the next one over if it's not too high.
+            else if (currNode.getNext() != null && compare(currNode.getNext().getData(), x) <= 0) {
+                currNode = currNode.getNext();
+            }
+            //It was too high, so go down instead.
+            else {
+                currNode = currNode.getDown();
+            }
+        }
+        return stackOfPreds;
+    }
 
-
-
-        return null; // placeholder, CHANGE THIS to return the correct thing
+    private int compare(Object data, E x) {
+        int intObj1 = (int)data;
+        int intObj2 = (int)x;
+ 
+        // Get the difference
+        int difference = intObj1 - intObj2;
+ 
+        if (difference == 0) {
+ 
+            // Both are equal
+            return 0;
+        }
+        else if (difference < 0) {
+ 
+            // obj1 < obj2
+            return -1;
+        }
+        else {
+ 
+            // obj1 > obj2
+            return 1;
+        }
     }
 
     public void print() {

@@ -18,10 +18,10 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         Node<E> pred0 = preds.peek();
         //set new node to node after head]
         
-        // if(pred0.nextNodes[0] != null && pred0.nextNodes[0].data.equals(x)) {
-        //     return false; // elt x was already present
-        // }
-        // create a new node for elt x, and generate its height
+        if(pred0.nextNodes[0] != null && pred0.nextNodes[0].data.equals(x)) {
+            return false; // elt x was already present
+        }
+        //create a new node for elt x, and generate its height
         Node<E> newNode = new Node<E>(x, chooseHeight());
         int newHeight = newNode.getHeight();
 

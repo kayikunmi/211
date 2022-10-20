@@ -129,7 +129,10 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
 
         Node<E> currNode = head;
         Stack<Node<E>> stackOfPreds = new Stack<Node<E>>();
-        stackOfPreds.push(head);
+        if(stackOfPreds.isEmpty()){
+            stackOfPreds.push(head);
+        }
+
         int level = height;
         while (level >= 0) {
             while (currNode.nextNodes[level] != null && compare(currNode.nextNodes[level].data,x) < 0){

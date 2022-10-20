@@ -63,7 +63,7 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
             if(preds.peek() == null){
                 head.nextNodes[i] = newNode;
             }
-            else{
+            else{ //swap nodes
             Node<E> temp = preds.peek().nextNodes[i];
             preds.peek().nextNodes[i] =newNode;
             newNode.nextNodes[i] = temp;
@@ -104,10 +104,8 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         } 
         numElts--; 
         System.out.println("Removed:" + x);
-        return u.data;
+        return x;
         // now we have one fewer element stored
-        // numElts--;
-        // return null; // placeholder, CHANGE THIS to return the correct thing
     }
 
     public E find(E x) {

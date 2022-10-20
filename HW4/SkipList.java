@@ -60,12 +60,8 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         // } 
 
         for(int i = 0; i<newNode.getHeight(); i++){
-            // if(preds.peek() == null){
-            //     head.nextNodes[i] = newNode;
-            // }
-            // else{ //swap nodes
             Node<E> temp = preds.peek().nextNodes[i];
-            preds.peek().nextNodes[i] =newNode;
+            preds.peek().nextNodes[i] = newNode;
             newNode.nextNodes[i] = temp;
             preds.pop();
             

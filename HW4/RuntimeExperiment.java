@@ -6,7 +6,7 @@ public class RuntimeExperiment {
 
     public void go(double p) {
         rand = new Random(5);
-        int n = 10; // 2^21
+        int n = 32; // 2^21
         for(int j = 0; j < 5; j++) {
             runTest(n, p);
         }
@@ -26,7 +26,7 @@ public class RuntimeExperiment {
 
 
     public static void main(String[] args) {
-        double p = 0.5;
+        double p = 0.55;
         if(args.length > 0) {
             try{
                 p = Double.parseDouble(args[0]);

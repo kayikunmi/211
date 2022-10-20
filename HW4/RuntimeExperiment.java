@@ -5,8 +5,8 @@ public class RuntimeExperiment {
     private Random rand;
 
     public void go(double p) {
-        rand = new Random(42);
-        int n = 2097152; // 2^21
+        rand = new Random(5);
+        int n = 10; // 2^21
         for(int j = 0; j < 5; j++) {
             runTest(n, p);
         }

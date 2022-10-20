@@ -17,7 +17,10 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         Stack<Node<E>> preds = findAllPreds(x);
         Node<E> pred0 = preds.peek();
         //set new node to node after head]
-        
+        if(preds.isEmpty()){
+            preds.push(head);
+            pred0 = preds.peek();
+        }
         if(pred0.nextNodes[0] != null && pred0.nextNodes[0].data.equals(x)) {
             return false; // elt x was already present
         }
@@ -60,10 +63,16 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         // } 
 
         for(int i = 0; i<newNode.getHeight(); i++){
+            if(preds.isEmpty()){
             Node<E> temp = preds.peek().nextNodes[i];
             preds.peek().nextNodes[i] = newNode;
             newNode.nextNodes[i] = temp;
             preds.pop();
+            }
+            else{
+                newNode.nextNodes[i] = null;
+        
+            }
             
         }
 
@@ -136,13 +145,15 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         int level = height;
         while (level >= 0) {
             while (currNode.nextNodes[level] != null && compare(currNode.nextNodes[level].data,x) < 0){
-                stackOfPreds.push((Node <E>) currNode.data); //add node to stack
+                stackOfPreds.push((Node <E>) currNode); //add node to stack
                 currNode = currNode.nextNodes[level]; //move to the right
             }
             level--;               // move to a lover level
         }
         System.out.println("Stack of preds:" + stackOfPreds);
+        countOps++;
         return stackOfPreds;
+    
     }
     
 
@@ -186,7 +197,9 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
 
 
     public int getOps() {
+        System.out.println("Count Ops: " + countOps);
         return countOps;
+       
     }
 
     private int chooseHeight() {

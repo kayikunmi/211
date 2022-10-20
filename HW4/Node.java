@@ -8,29 +8,29 @@ public class Node<E> {
     public Node<E> prev;
     public Node<E> down;
 
-    public E getData() {
-        return data;    
-    }
-    public Node <E> getNext() {
-        return next;
-    }
-    public Node <E> getPrev() {
-        return prev;
-    }
-    public Node <E> getDown() {
-        return down;
-    }
+    // public E getData() {
+    //     return data;    
+    // }
+    // public Node <E> getNext() {
+    //     return next;
+    // }
+    // public Node <E> getPrev() {
+    //     return prev;
+    // }
+    // public Node <E> getDown() {
+    //     return down;
+    // }
 
 
-    public void setNext(Node <E> nextNode) {
-        this.next = nextNode;
-    }
-    public void setPrev(Node <E> prevNode) {
-        this.prev = prevNode;
-    }
-    public void setDown(Node <E> downNode) {
-        this.down = downNode;
-    }
+    // public void setNext(Node <E> nextNode) {
+    //     this.next = nextNode;
+    // }
+    // public void setPrev(Node <E> prevNode) {
+    //     this.prev = prevNode;
+    // }
+    // public void setDown(Node <E> downNode) {
+    //     this.down = downNode;
+    // }
 
     //this is safe
 

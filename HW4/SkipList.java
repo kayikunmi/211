@@ -28,7 +28,7 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         // increase the height of the head node, if needed
         if (newHeight > height) {
             if (newHeight > head.nextNodes.length-1) {
-                Node<E>[] temp = (Node<E>[]) Array.newInstance(Node.class, newHeight+1);
+                Node<E>[] temp =  (Node<E>[]) Array.newInstance(Node.class, newHeight+1);
                 for(int i = 0; i < head.nextNodes.length; i++) {
                     temp[i] = head.nextNodes[i];
                 }
@@ -42,44 +42,37 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
 
         // add x after its predecessor on each level within x's height
         // YOU FILL IN THIS PART
-        // int currentLevel = 0;
-        // while(currentLevel != height){
-        //     //add this number where it belongs
-        //     //the number will go after the number that is at the top of the stack.
-        //     if (!findAllPreds(x).isEmpty()){
-        //     Node<E> addbefore = findAllPreds(x).peek();
-        //     //switch
-        //     Node <E> temp = addbefore.next;
-        //     addbefore.next = (Node<E>) x;
-        //     temp.prev = (Node<E>) x;
-        //     }
         
+        // Node<E> u = head; 
+        // int r = height; 
+        // int comp = 0; 
+        // while (r >= 0) { 
+        //     while (u.nextNodes[r] != null && (comp = compare(u.nextNodes[r].data,x)) < 0) 
+        //     u = u.nextNodes[r]; 
+        //     if (u.nextNodes[r] != null && comp == 0) return false; 
+        //     u.nextNodes[r--] = u; // going down, store u 
+        // } 
+        // Node<E> w = new Node<E>(x, chooseHeight()); 
+        // while (height < w.getHeight())  height++; u.nextNodes[height] = head; height--;// height increased 
+        // for (int i = 0; i < w.nextNodes.length; i++) { 
+        //     w.nextNodes[i] = u.nextNodes[i].nextNodes[i]; 
+        //     u.nextNodes[i].nextNodes[i] = w; 
+        // } 
 
-        //     currentLevel ++;
-        // }
-        // // I think I have it, but the next step will be to do this on each level. How do I do this? and check it?
+        for(int i = 0; i<newNode.getHeight(); i++){
+            if(preds.peek() == null){
+                head.nextNodes[i] = newNode;
+            }
+            else{
+            Node<E> temp = preds.peek().nextNodes[i];
+            preds.peek().nextNodes[i] =newNode;
+            newNode.nextNodes[i] = temp;
+            preds.pop();
+            }
+        }
 
-
-
-        // // now we have one more element stored
-        // numElts++;
-        // return true;
-        Node<E> u = head; 
-        int r = height; 
-        int comp = 0; 
-        while (r >= 0) { 
-            while (u.nextNodes[r] != null && (comp = compare(u.nextNodes[r].data,x)) < 0) 
-            u = u.nextNodes[r]; 
-            if (u.nextNodes[r] != null && comp == 0) return false; 
-            u.nextNodes[r--] = u; // going down, store u 
-        } 
-        Node<E> w = new Node<E>(x, chooseHeight()); 
-        while (height < w.getHeight())  height++; u.nextNodes[height] = head; height--;// height increased 
-        for (int i = 0; i < w.nextNodes.length; i++) { 
-            w.nextNodes[i] = u.nextNodes[i].nextNodes[i]; 
-            u.nextNodes[i].nextNodes[i] = w; 
-        } 
         numElts++; 
+        System.out.println("Added:" + x);
         return true;
     }
 
@@ -110,10 +103,8 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
             r--; 
         } 
         numElts--; 
-        return x;
-
-
-
+        System.out.println("Removed:" + x);
+        return u.data;
         // now we have one fewer element stored
         // numElts--;
         // return null; // placeholder, CHANGE THIS to return the correct thing
@@ -141,54 +132,18 @@ public class SkipList<E extends Comparable<E>> implements AmhSortedSet<E> {
         if it is greater than x, stop and go to the lower level.
         store that in the stack
         */
-        // int highestLevel = height - 1;
-        // Node<E> check = head;
-        // Integer numx = (Integer) x;
-        // Integer numcheck = (Integer) check.data;
-        // for (int i = highestLevel; i >= 0; i --){    
-        //    while (numcheck.intValue() < numx.intValue()){
-        //         check = check.nextNodes[i]; //go to the next node
-        //    }
-        // }
-        // return null; // placeholder, CHANGE THIS to return the correct thing
-        // Node<E> currNode = head;
-        // Stack<Node<E>> stackOfPreds = new Stack<Node<E>>();
-        // boolean found = false;
-        // while (!found) {
-        //     int index = 0;
-        //     //special case to return a node containing null - indicates value not in list
-        //     if (currNode == null) {
-        //         stackOfPreds.push(currNode);
-        //         return stackOfPreds;
-        //     }
-        //     // found it!
-        //     else if (x.equals(currNode.getData())) {
-        //         found = true;
-        //     }
-        //     //Go to the next one over if it's not too high.
-        //     else if (currNode.getNext() != null && compare(currNode.getNext().getData(), x) <= 0) {
-        //         currNode = currNode.getNext();
-        //     }
-        //     //It was too high, so go down instead.
-        //     else {
-        //         currNode = currNode.down;
-        //     }
-        //     index++;
-        //     currNode = currNode.nextNodes[index];
-            
-            
-        // }
-        // return stackOfPreds;
 
-        Node<E> u = head;
+        Node<E> currNode = head;
         Stack<Node<E>> stackOfPreds = new Stack<Node<E>>();
-        int r = height;
-        while (r >= 0) {
-            while (u.nextNodes[r] != null && compare(u.nextNodes[r].data,x) < 0)
-                u = u.nextNodes[r];   // go right in list r
-                stackOfPreds.push(u);
-            r--;               // go down into list r-1
+        int level = height;
+        while (level >= 0) {
+            while (currNode.nextNodes[level] != null && compare(currNode.nextNodes[level].data,x) < 0){
+                stackOfPreds.push((Node <E>) currNode.data); //add node to stack
+                currNode = currNode.nextNodes[level]; //move to the right
+            }
+            level--;               // move to a lover level
         }
+        System.out.println("Stack of preds:" + stackOfPreds);
         return stackOfPreds;
     }
     

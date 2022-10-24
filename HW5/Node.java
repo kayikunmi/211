@@ -1,8 +1,6 @@
-
-
 class Node {
     int key;
-    public int value;
+    int value;
     Node left, right;
    
 

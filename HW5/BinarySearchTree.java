@@ -21,7 +21,48 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         System.out.println("added " + key + " at " + value);
     }
       
-    public V delete(int key) {return null;}
+    public int delete(int key) {
+        root = deleteRec(root, key);
+        int value = root.value;
+        return value;
+    }
+    Node deleteRec(Node root, int key) {
+        // Return if the tree is empty
+        if (root == null)
+          return root;
+    
+        // Find the node to be deleted
+        if (key < root.key)
+          root.left = deleteRec(root.left, key);
+        else if (key > root.key)
+          root.right = deleteRec(root.right, key);
+        else {
+          // If the node is with only one child or no child
+          if (root.left == null)
+            return root.right;
+          else if (root.right == null)
+            return root.left;
+    
+          // If the node has two children
+          // Place the inorder successor in position of the node to be deleted
+          root.key = minValue(root.right);
+    
+          // Delete the inorder successor
+          root.right = deleteRec(root.right, root.key);
+        }
+    
+        return root;
+      }
+    
+      // Find the inorder successor
+      int minValue(Node root) {
+        int minv = root.key;
+        while (root.left != null) {
+          minv = root.left.key;
+          root = root.left;
+        }
+        return minv;
+      }
       
     public int lookup(int key) {
         // Key is equal to the key at root
@@ -61,15 +102,16 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
         bst.add(5,5); //rn, i'm only adding at the root
-       bst.add(7,7);
-       bst.add(3,3);
-       bst.add(12,12);
-       bst.add(13,13);
-       bst.add(1,1);
-       bst.add(0,0);
-       bst.add(2,2);
-       System.out.println("bst root: " + bst.root.key);
-       bst.inOrderTraverse();
+        bst.add(7,7);
+        bst.add(3,3);
+        
+        System.out.println("bst root: " + bst.root.key);
+        bst.inOrderTraverse();
+        System.out.println();
+        System.out.println("Remove: " + bst.delete(3));
+        bst.inOrderTraverse();
+        System.out.println();
+        bst.add(2,2);
 
     }
 }

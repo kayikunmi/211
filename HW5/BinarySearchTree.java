@@ -50,16 +50,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
       // print the values in this BST in sorted order (to p)
 
     private void inOrderTraverseRecursive(Node root) {
-        if (root == null)
+        if (root == null){
             return;
- 
-        /* first recur on left child */
-       inOrderTraverseRecursive(root.left);
- 
-        /* then print the data of node */
+        }
+        inOrderTraverseRecursive(root.left);
         System.out.print(root.key + " ");
- 
-        /* now recur on right child */
         inOrderTraverseRecursive(root.right);
     }
 
@@ -68,9 +63,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         bst.add(5,5); //rn, i'm only adding at the root
        bst.add(7,7);
        bst.add(3,3);
-       bst.add(12,6);
-       bst.add(13,3);
-       bst.add(1,3);
+       bst.add(12,12);
+       bst.add(13,13);
+       bst.add(1,1);
+       bst.add(0,0);
+       bst.add(2,2);
        System.out.println("bst root: " + bst.root.key);
        bst.inOrderTraverse();
 

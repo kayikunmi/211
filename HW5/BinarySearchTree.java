@@ -1,36 +1,36 @@
 //import java.util.*;
 public class BinarySearchTree<K extends Comparable<K>, V> {
-    Node root;
+    Node<K,V> root;
     BinarySearchTree() {
         root = null;
     }
-    Node temp = root;
+    Node<K,V> temp = root;
     
-    public void add(int key, int value) {
+    public void add(K key, V value) {
         root = add(root, key,value);
     }
 
-    Node add(Node addkey, int key, int value){
+    Node<K,V> add(Node<K,V> addkey, K key, V value){
         //If the tree is empty
            if (addkey == null) {
-            addkey = new Node(key, value);
+            addkey = new Node<K,V>(key, value);
             return addkey;
         }
         /*Otherwise, check if the key is greater or less than the node
          * If it is less, add it to the left
          * If it is greater, add it to the right side*/
-        else if (key < addkey.key){
+        else if ((int)(key) < (int)(addkey.key)){
             addkey.left = add(addkey.left, key, value);
         }
-        else if (key > addkey.key){
+        else if ((int)(key) > (int)(addkey.key)){
             addkey.right = add(addkey.right, key, value);
         }
         return addkey;
     }
 
-    public int delete(int key) {
+    public int delete(K key) {
         int answer = lookup(key);
-        Node curr = root;
+        Node<K,V> curr = root;
         deleteNode(curr, key); //delete the node with recursion using the root
         return answer;
     }
@@ -39,17 +39,17 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
      * If node is null return  null
      * if the key is less than 
      */
-    public Node deleteNode(Node del, int key) {
+    public Node<K,V> deleteNode(Node<K,V> del, K key) {
         //If node is null return  null
         if (del == null) {
             return null;
         }
         //if key is greater than, delete (recursion) on the right side
-        if (key > del.key) {
+        if ((int)(key) > (int)(del.key)) {
             del.right = deleteNode(del.right, key);
         }
         //if its less, delete (recursion) on the left side
-        else if (key < del.key) {
+        else if ((int)(key) < (int)(del.key)) {
             del.left = deleteNode(del.left, key);
         }
         //then, check for children
@@ -75,33 +75,33 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
 
     /* The sucessor is the smallest number on the right side
      * The predecssor is the biggest number on the left side*/
-    int successor(Node root) {
+    public K successor(Node<K,V> root) {
         root = root.right;
         while (root.left != null) {
             root = root.left;
         }
-        return root.value;
+        return root.key;
     }
 
-    int predecessor(Node root) {
+    public K predecessor(Node<K,V> root) {
         root = root.left;
         while (root.right != null){
             root = root.right;
         }
-        return root.value;
+        return root.key;
     }
 
-    public int lookup(int key) {
+    public int lookup(K key) {
         return lookup(root, key);
     }
-    public int lookup(Node find, int key){
+    public int lookup(Node<K,V> find, K key){
         //if find is null, return -1. DNE
         if (find == null){
             return -1;
         }
         //great, we found it. return the value
         if (find.key == key){
-            return find.value;
+            return (int)(find.value);
         }
         // recursion on left subtree /
         int res1 = lookup(find.left, key);
@@ -115,12 +115,12 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     }
      
     public void inOrderTraverse() {
-        Node temp = root;
+        Node<K,V> temp = root;
         inOrderTraverseRecursive(temp);
     }
 
 
-    private void inOrderTraverseRecursive(Node temp) {
+    private void inOrderTraverseRecursive(Node<K,V> temp) {
         if (temp == null){
             return;
         }

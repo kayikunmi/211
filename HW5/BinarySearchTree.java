@@ -6,79 +6,85 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     }
     
     public void add(int key, int value) {
-        if (root == null) { //add at root
-            // Insert the new data, if root is null.
+        Node temp = root;
+        if (temp == null) { //add at temp
+            // Insert the new data, if temp is null.
             root = new Node(key, value);
         }
-        else if ((int)(root.key) >= (int)(key)) {
-            // if current root data is greater than the new data then now process the left sub-tree
-            root.left = new Node(key, value);
+        else if ((int)(temp.key) >= (int)(key)) {
+            // if current temp data is greater than the new data then now process the left sub-tree
+            temp.left = new Node(key, value);
         } 
         else {
-            // if current root data is less than the new data then now process the right sub-tree
-            root.right = new Node(key, value);
+            // if current temp data is less than the new data then now process the right sub-tree
+            temp.right = new Node(key, value);
         }
         System.out.println("added " + key + " at " + value);
     }
       
     public int delete(int key) {
-        root = deleteRec(root, key);
-        int value = root.value;
-        return value;
+        Node curr = root;
+        // curr = deleteRec(curr, key);
+        // int value = curr.value;
+        return deleteRec(curr, key).value;
     }
-    Node deleteRec(Node root, int key) {
+    Node deleteRec(Node temp, int key) {
+        if(temp.key == key){
+            return temp;
+        }
         // Return if the tree is empty
-        if (root == null)
-          return root;
+        // else if (temp == null)
+        //   return temp;
     
         // Find the node to be deleted
-        if (key < root.key)
-          root.left = deleteRec(root.left, key);
-        else if (key > root.key)
-          root.right = deleteRec(root.right, key);
+        if (key < temp.key)
+          temp = deleteRec(temp.left, key);
+        else if (key > temp.key)
+          temp = deleteRec(temp.right, key);
         else {
           // If the node is with only one child or no child
-          if (root.left == null)
-            return root.right;
-          else if (root.right == null)
-            return root.left;
+          if (temp.left == null)
+            return temp.right;
+          else if (temp.right == null)
+            return temp.left;
     
           // If the node has two children
           // Place the inorder successor in position of the node to be deleted
-          root.key = minValue(root.right);
+          temp.key = minValue(temp.right);
     
           // Delete the inorder successor
-          root.right = deleteRec(root.right, root.key);
+          temp.right = deleteRec(temp.right, temp.key);
         }
     
-        return root;
+        return temp;
       }
     
       // Find the inorder successor
-      int minValue(Node root) {
-        int minv = root.key;
-        while (root.left != null) {
-          minv = root.left.key;
-          root = root.left;
+      int minValue(Node temp) {
+        int minv = temp.key;
+        while (temp.left != null) {
+          minv = temp.left.key;
+          temp = temp.left;
         }
         return minv;
       }
       
     public int lookup(int key) {
-        // Key is equal to the key at root
-        if (root==null || root.key==key){
-            int lookupValue = root.value;
+        Node temp = root;
+        // Key is equal to the key at temp
+        if (temp==null || temp.key==key){
+            int lookupValue = temp.value;
             return lookupValue;
         }
-        // Key is greater than root's key
-        if ((int)(root.key) < (int)(key)){
-            root = root.right;
-            return lookup(root.key);
+        // Key is greater than temp's key
+        if ((int)(temp.key) < (int)(key)){
+            temp = temp.right;
+            return lookup(temp.key);
         }
-        // Key is smaller than root's key
-        else if((int)(root.key) < (int)(key)){
-            root = root.left;
-            return lookup(root.key);
+        // Key is smaller than temp's key
+        else if((int)(temp.key) < (int)(key)){
+            temp = temp.left;
+            return lookup(temp.key);
         }
         else{
             return -1;
@@ -86,28 +92,30 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     }
      
     public void inOrderTraverse() {
-        inOrderTraverseRecursive(root);
+        Node temp = root;
+        inOrderTraverseRecursive(temp);
     }
       // print the values in this BST in sorted order (to p)
 
-    private void inOrderTraverseRecursive(Node root) {
-        if (root == null){
+    private void inOrderTraverseRecursive(Node temp) {
+        if (temp == null){
             return;
         }
-        inOrderTraverseRecursive(root.left);
-        System.out.print(root.key + " ");
-        inOrderTraverseRecursive(root.right);
+        inOrderTraverseRecursive(temp.left);
+        System.out.print(temp.key + " ");
+        inOrderTraverseRecursive(temp.right);
     }
 
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
-        bst.add(5,5); //rn, i'm only adding at the root
+        bst.add(5,5); //rn, i'm only adding at the temp
         bst.add(7,7);
         bst.add(3,3);
         
         System.out.println("bst root: " + bst.root.key);
         bst.inOrderTraverse();
         System.out.println();
+        System.out.println("Lookup: " + bst.lookup(3));
         System.out.println("Remove: " + bst.delete(3));
         bst.inOrderTraverse();
         System.out.println();

@@ -7,90 +7,110 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     Node temp = root;
     
     public void add(int key, int value) {
-        root = insertRec(root, key,value);
+        root = add(root, key,value);
     }
 
-    Node insertRec(Node root, int key, int value){
-        //Node temp = root;
-        /* If the tree is empty,
-           return a new node */
-           if (root == null) {
-            root = new Node(key, value);
-            return root;
+    Node add(Node addkey, int key, int value){
+        //If the tree is empty
+           if (addkey == null) {
+            addkey = new Node(key, value);
+            return addkey;
         }
- 
-        /* Otherwise, recur down the tree */
-        else if (key < root.key)
-            root.left = insertRec(root.left, key, value);
-        else if (key > root.key)
-            root.right = insertRec(root.right, key, value);
- 
-        /* return the (unchanged) node pointer */
-        return root;
+        /*Otherwise, check if the key is greater or less than the node
+         * If it is less, add it to the left
+         * If it is greater, add it to the right side*/
+        else if (key < addkey.key){
+            addkey.left = add(addkey.left, key, value);
+        }
+        else if (key > addkey.key){
+            addkey.right = add(addkey.right, key, value);
+        }
+        return addkey;
     }
 
-
-    int successor(Node root) {
-        root = root.right;
-        while (root.left != null) root = root.left;
-        return root.value;
-      }
-      int predecessor(Node root) {
-        root = root.left;
-        while (root.right != null) root = root.right;
-        return root.value;
-      }
-       
-      Node deleteNode(Node del, int key) {
-
-        if (del == null) return null;
-        if (key > del.value) del.right = deleteNode(del.right, key);
-        else if (key < del.value) del.left = deleteNode(del.left, key);
-        else {
-          if (del.left == null && del.right == null) del = null;
-          else if (del.right != null) {
-            del.value = successor(del);
-            del.right = deleteNode(del.right, del.value);
-          } 
-          else {
-            del.value = predecessor(del);
-            del.left = deleteNode(del.left, del.value);
-          }
-        }
-        return del;
-      }
-      
-
-      
     public int delete(int key) {
         int answer = lookup(key);
         Node curr = root;
-        deleteNode(curr, key);
+        deleteNode(curr, key); //delete the node with recursion using the root
         return answer;
     }
     
+    /*Delete with recursion
+     * If node is null return  null
+     * if the key is less than 
+     */
+    public Node deleteNode(Node del, int key) {
+        //If node is null return  null
+        if (del == null) {
+            return null;
+        }
+        //if key is greater than, delete (recursion) on the right side
+        if (key > del.key) {
+            del.right = deleteNode(del.right, key);
+        }
+        //if its less, delete (recursion) on the left side
+        else if (key < del.key) {
+            del.left = deleteNode(del.left, key);
+        }
+        //then, check for children
+        else {
+            //no kids, no problem
+            if (del.left == null && del.right == null) {
+                del = null;
+            }
+            //damn, there's kids. 
+            //check if we can use a successor
+            else if (del.right != null) {
+                del.key = successor(del);
+                del.right = deleteNode(del.right, del.key);
+            } 
+            //can't use successor, so we replace with a predecessor
+            else {
+                del.key = predecessor(del);
+                del.left = deleteNode(del.left, del.key);
+            }
+        }
+        return del;
+    }
+
+    /* The sucessor is the smallest number on the right side
+     * The predecssor is the biggest number on the left side*/
+    int successor(Node root) {
+        root = root.right;
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root.value;
+    }
+
+    int predecessor(Node root) {
+        root = root.left;
+        while (root.right != null){
+            root = root.right;
+        }
+        return root.value;
+    }
 
     public int lookup(int key) {
         return lookup(root, key);
     }
-    static int lookup( Node node, int key)
-    {
-        if (node == null)
+    public int lookup(Node find, int key){
+        //if find is null, return -1. DNE
+        if (find == null){
             return -1;
-    
-        if (node.key == key)
-            return node.value;
-    
-        // then recur on left subtree /
-        int res1 = lookup(node.left, key);
-    
-        // node found, no need to look further
-        if(res1>0) return res1;
-    
-        // node is not found in left,
-        // so recur on right subtree /
-        int res2 = lookup(node.right, key);
-    
+        }
+        //great, we found it. return the value
+        if (find.key == key){
+            return find.value;
+        }
+        // recursion on left subtree /
+        int res1 = lookup(find.left, key);
+        // find found, no need to lookup anymore. return it
+        if(res1>0) {
+            return res1;
+        }
+        // find is not found in left, recursion on right subtree, and return it
+        int res2 = lookup(find.right, key);
         return res2;
     }
      
@@ -98,12 +118,17 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         Node temp = root;
         inOrderTraverseRecursive(temp);
     }
-      // print the values in this BST in sorted order (to p)
+
 
     private void inOrderTraverseRecursive(Node temp) {
         if (temp == null){
             return;
         }
+        /*print all left nodes first,
+         * then the "parent"
+         * and finally the right node at each "parent
+         * output should be in ascending order
+        */
         inOrderTraverseRecursive(temp.left);
         System.out.print(temp.key + " ");
         inOrderTraverseRecursive(temp.right);
@@ -123,7 +148,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         bst.inOrderTraverse();
         System.out.println();
         System.out.println("Lookup: " + bst.lookup(3));
-        System.out.println("Remove: " + bst.delete(1));
+        System.out.println("Lookup: " + bst.lookup(14));
+        System.out.println("Remove: " + bst.delete(5));
         bst.inOrderTraverse();
         System.out.println();
         //bst.add(2,2);

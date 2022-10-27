@@ -27,6 +27,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         else if (s1.compareTo(s2)>0){
             addkey.right = addroot(addkey.right, key, value);
         }
+        //add a case if its already there
+        else if(s1.compareTo(s2) ==0){
+            //update the value
+            addkey.value = value;
+        }
         return addkey;
     }
 
@@ -99,12 +104,13 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     public int lookup(Node<K,V> findkey, K key){ 
         //if find is null, return -1. DNE
         if (findkey == null){
-            return -1;
+            return 0;
         }
-        String s1=String.valueOf(key); 
-        String s2=String.valueOf(findkey.key); 
+        // String s1=String.valueOf(key); 
+        // String s2=String.valueOf(findkey.key); 
         //great, we found it. return the value
-        if (findkey.key == key){
+        // System.out.println("Ran Lookup()- " + findkey.key + ": " + findkey.value);
+        if (findkey.key.compareTo(key)==0){
             return (int)(findkey.value);
         }
         // recursion on left subtree /
@@ -133,8 +139,9 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
          * and finally the right node at each "parent
          * output should be in ascending order
         */
+        //System.out.println(",");
         inOrderTraverseRecursive(temp.left);
-        System.out.print(temp.key + " ");
+        System.out.print(temp.key + ":" + temp.value + " ");
         inOrderTraverseRecursive(temp.right);
     }
 
@@ -158,7 +165,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         bst.inOrderTraverse();
         System.out.println();
         System.out.println("bst root: " + bst.root.key);
-        //bst.add(2,2);
+        bst.add(4,97);
+        System.out.println("Lookup: " + bst.lookup(4));
 
     }
 }

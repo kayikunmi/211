@@ -1,6 +1,13 @@
 Kayikunmi
-michelle person
-bagel hello
+michelle 
+person
+bagel 
 hello
-cheese kayikunmi help
-hello, help me
+kayikunmi hello me
+hello
+cheese 
+kayikunmi 
+help
+hello, 
+help 
+me

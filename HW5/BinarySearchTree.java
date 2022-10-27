@@ -7,10 +7,10 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     Node<K,V> temp = root;
     
     public void add(K key, V value) {
-        root = add(root, key,value);
+        root = addroot(root, key,value);
     }
 
-    Node<K,V> add(Node<K,V> addkey, K key, V value){
+    Node<K,V> addroot(Node<K,V> addkey, K key, V value){
         //If the tree is empty
            if (addkey == null) {
             addkey = new Node<K,V>(key, value);
@@ -19,11 +19,13 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         /*Otherwise, check if the key is greater or less than the node
          * If it is less, add it to the left
          * If it is greater, add it to the right side*/
-        else if ((int)(key) < (int)(addkey.key)){
-            addkey.left = add(addkey.left, key, value);
+        String s1=String.valueOf(key); 
+        String s2=String.valueOf(addkey.key);  
+        if (s1.compareTo(s2)<0){
+            addkey.left = addroot(addkey.left, key, value);
         }
-        else if ((int)(key) > (int)(addkey.key)){
-            addkey.right = add(addkey.right, key, value);
+        else if (s1.compareTo(s2)>0){
+            addkey.right = addroot(addkey.right, key, value);
         }
         return addkey;
     }
@@ -149,9 +151,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         System.out.println();
         System.out.println("Lookup: " + bst.lookup(3));
         System.out.println("Lookup: " + bst.lookup(14));
-        System.out.println("Remove: " + bst.delete(5));
+        System.out.println("Remove: " + bst.delete(7));
+        System.out.println("Remove: " + bst.delete(12));
         bst.inOrderTraverse();
         System.out.println();
+        System.out.println("bst root: " + bst.root.key);
         //bst.add(2,2);
 
     }

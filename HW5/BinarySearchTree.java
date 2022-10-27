@@ -96,23 +96,25 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     public int lookup(K key) {
         return lookup(root, key);
     }
-    public int lookup(Node<K,V> find, K key){
+    public int lookup(Node<K,V> findkey, K key){ 
         //if find is null, return -1. DNE
-        if (find == null){
+        if (findkey == null){
             return -1;
         }
+        String s1=String.valueOf(key); 
+        String s2=String.valueOf(findkey.key); 
         //great, we found it. return the value
-        if (find.key == key){
-            return (int)(find.value);
+        if (findkey.key == key){
+            return (int)(findkey.value);
         }
         // recursion on left subtree /
-        int res1 = lookup(find.left, key);
+        int res1 = lookup(findkey.left, key);
         // find found, no need to lookup anymore. return it
         if(res1>0) {
             return res1;
         }
         // find is not found in left, recursion on right subtree, and return it
-        int res2 = lookup(find.right, key);
+        int res2 = lookup(findkey.right, key);
         return res2;
     }
      
@@ -143,7 +145,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         bst.add(3,3);
         bst.add(1,1);
         bst.add(5,5);
-        bst.add(14, 14);
+        bst.add(14, 12);
         bst.add(4,4);
         
         System.out.println("bst root: " + bst.root.key);

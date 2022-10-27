@@ -1,0 +1,10 @@
+PS C:\Users\kunmi\Desktop\Code\211\HW5>  & 'C:\Users\kunmi\Documents\Java\jdk-19\bin\java.exe' '--enable-preview' '-XX:+ShowCodeDetailsInExceptionMessages' '-cp' 'C:\Users\kunmi\AppData\Roaming\Code\User\workspaceStorage\efebfc289c05da856eb7139b4c701722\redhat.java\jdt_ws\HW5_18593d88\bin' 'BinarySearchTree' 
+bst root: 7
+1:1 14:12 3:3 4:4 5:5 7:7 8:8 
+Lookup: 3
+Lookup: 12
+Remove: 7
+Remove: 0
+1:1 14:12 3:3 4:4 5:5 8:7
+bst root: 8
+Lookup: 97

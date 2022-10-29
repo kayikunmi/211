@@ -1,9 +1,6 @@
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.util.*;
+import java.io.*;
+
 
 public class HTGenerator {
 

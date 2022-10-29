@@ -12,14 +12,17 @@ public class ChainedHashSet<E> implements AmhHashSet<E> {
     } // ChainedHashSet ()
 
     public boolean insert (E key) {
+        return false;
 
     } // insert ()
 
     public boolean lookup (E key) {
+        return false;
 
     } // lookup ()
 
     public boolean remove (E key) {
+        return false;
 
     }
 

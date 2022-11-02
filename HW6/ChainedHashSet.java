@@ -8,29 +8,43 @@ public class ChainedHashSet<E> implements AmhHashSet<E> {
     private int             collisions;
     
     public ChainedHashSet (int capacity) {
-        this.m =capacity;
-        this.storage=storage;
+        LinkedList[] storage = new LinkedList [capacity]; 
+        for(int i =0; i< capacity; i++){
+            storage[i] = new LinkedList<E>();
+        }
+        this.m = capacity;
+        this.n = 0;
+        this.storage = storage;
+        collisions = 0;
     } // ChainedHashSet ()
     
 
     public boolean insert (E key) {
+        //fnd out where its suposed to be
+        int h = key.hashCode()%m;
+        //if its not in the table, add it
         if (lookup(key)!= true) {
-			int h = hash(key);
-			LinkedList newNode = new LinkedList();
-			newNode = storage[h];
-			storage[h].add(h, key);
-			n++;
+            //check for collision
+            if(!storage[h].isEmpty()){
+                collisions++;
+            }
+			storage[h].add(key);
+            //increment size
+			n++; 
             return true;
 		}
-        return false;
+        //if its already there, don't add
+        else{
+            return false;
+        }
     } // insert ()
 
 
 
     public boolean lookup (E key) {
-        int h = hash(key);
-		LinkedList current = storage[h];
-		if (current.contains(key)) {
+        //find where its supposed to be
+        int h = key.hashCode()%m;
+		if (storage[h].contains(key)) {
 			return true;
 		}
         else{
@@ -40,11 +54,12 @@ public class ChainedHashSet<E> implements AmhHashSet<E> {
     } // lookup ()
 
     public boolean remove (E key) {
-        if (lookup(key) != true) {
-            int h = hash(key);
-            LinkedList newNode = new LinkedList();
-			newNode = storage[h];
-            storage[h].remove();
+        //fnd out where its suposed to be
+        int h = key.hashCode()%m;
+        //if its in the list, remove it
+        if (lookup(key) == true) {
+            storage[h].remove(storage[h].indexOf(key));
+            //decrement size
 			n--;
             return true;
         }

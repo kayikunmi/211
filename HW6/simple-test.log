@@ -1,1 +1,16 @@
+insert         12 ->  true : match
+lookup         20 -> false : match
+lookup         12 ->  true : match
+lookup          4 -> false : match
+lookup         12 ->  true : match
+remove         12 ->  true : match
+remove          2 -> false : match
+lookup         19 -> false : match
+remove          6 -> false : match
+lookup         18 -> false : match
+lookup         10 -> false : match
+insert          3 ->  true : match
+insert          4 ->  true : match
+insert          9 ->  true : match
+remove          3 ->  true : match
 Total collisions = 0

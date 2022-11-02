@@ -14,9 +14,18 @@ public class ChainedHashSet<E> implements AmhHashSet<E> {
     
 
     public boolean insert (E key) {
+        if (lookup(key)!= true) {
+			int h = hash(key);
+			LinkedList newNode = new LinkedList();
+			newNode = storage[h];
+			storage[h].add(h, key);
+			n++;
+            return true;
+		}
         return false;
-
     } // insert ()
+
+
 
     public boolean lookup (E key) {
         int h = hash(key);
@@ -31,7 +40,17 @@ public class ChainedHashSet<E> implements AmhHashSet<E> {
     } // lookup ()
 
     public boolean remove (E key) {
-        return false;
+        if (lookup(key) != true) {
+            int h = hash(key);
+            LinkedList newNode = new LinkedList();
+			newNode = storage[h];
+            storage[h].remove();
+			n--;
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 

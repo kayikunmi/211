@@ -8,8 +8,10 @@ public class ChainedHashSet<E> implements AmhHashSet<E> {
     private int             collisions;
     
     public ChainedHashSet (int capacity) {
-
+        this.m =capacity;
+        this.storage=storage;
     } // ChainedHashSet ()
+    
 
     public boolean insert (E key) {
         return false;
@@ -17,7 +19,14 @@ public class ChainedHashSet<E> implements AmhHashSet<E> {
     } // insert ()
 
     public boolean lookup (E key) {
-        return false;
+        int h = hash(key);
+		LinkedList current = storage[h];
+		if (current.contains(key)) {
+			return true;
+		}
+        else{
+            return false;
+        }
 
     } // lookup ()
 

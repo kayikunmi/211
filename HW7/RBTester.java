@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class RBTester {
+    static int height, blackheight, heightLeft, heightRight = 0;
+    // int height, heightLeft, heightRight = 0;
 
     public static void main (String[] args) {
 
@@ -59,10 +61,132 @@ public class RBTester {
     private static boolean isRBTree (RedBlackTree<Integer> rbt) {
 
 	RBNode<Integer> root = rbt.root;
-
         // COMPLETE THIS METHOD.  YOU MAY/SHOULD USE HELPER METHODS.
-	
+
+        if(checkRoot(root) == true && 
+        childofRedisBlack(root) == true && 
+        checkLeafisBlack(root) == true &&
+        blackHeight(root) == 0){
+            return true;
+        }
+
+        else{
+            return false;
+        }
     }
 
+    private static boolean checkRoot(RBNode<Integer> root){
+        if(root.red!= true){
+            //if it is false, that means the root is black
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private static boolean childofRedisBlack(RBNode<Integer> root){
+        if(root.red == true){
+            //this node is red
+            if((root.left.red != true) && (root.right.red != true)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean checkLeafisBlack(RBNode<Integer> node)
+    {
+    /*if the root is null, dont return false, 
+    cehck if its red or black then cehck if 
+    kids are null, if they are, check if red or black*/
+      
+        // If node is null, return
+        // if (node == null){
+        //     if(node.red != true){
+        //         return true;
+        //     }
+        // }
+        
+        // If node is leaf node, check that its black
+        if (node.left == null && node.right == null)
+        {   
+            if(node.left.red!= true && node.right.red!= true){
+                //if it is false, that means the leaf is black
+                return true;
+            }
+        }
+    
+        // If left child exists, check for leaf
+        // recursively
+        if (node.left != null){
+            checkLeafisBlack(node.left);
+        }
+          
+        // If right child exists, check for leaf
+        // recursively
+        if (node.right != null){
+            checkLeafisBlack(node.right);
+        }
+        return false;
+    
+    }
+
+    // private static boolean rootToLeaf(RBNode<Integer> node){
+    //     if (node == null) {
+    //         return false;
+    //     }
+    //     if(heightLeft == heightRight)
+    //     return true;
+    // }
+
+    // private static int blackHeight(RBNode<Integer> node){
+    //     if (node.red == false){
+    //         height++;
+    //     }
+    //     if (node.left != null){
+    //         heightLeft = blackHeight(node.left);
+    //     }
+    //     else{
+    //         heightLeft = 1;
+    //     }
+    //     if (node.right != null){
+    //         heightRight = blackHeight(node.right);
+    //     }
+    //     else{
+    //         heightRight = 1;
+    //     }
+    //     // if (heightLeft != heightRight)
+    //     //     //YOU HAVE A PROBLEM!
+    //     height += heightLeft;
+    //     return height;
+    // }
+
+    private static int blackHeight(RBNode<Integer> root) {
+        if (root == null)
+            return blackheight; 
+
+        if (root.red == false) {
+            blackheight ++;
+
+        } 
+        // else {
+        //     root.black_count = root.parent.black_count;
+        // }
+        if ((root.left == null) && (root.right == null)) {              
+            blackheight ++;            
+        }               
+        // blackHeight(root.left);
+        // blackHeight(root.right);
+        if(blackHeight(root.left) == blackHeight(root.right)){
+            return 0;
+        }
+        else{
+            return -1;
+        }
+    } 
+
+
+//true is red, false is black
 
 } // class RBTest

@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 
 public class RBTester {
     static int height, blackheight, heightLeft, heightRight = 0;
-    // int height, heightLeft, heightRight = 0;
+
 
     public static void main (String[] args) {
 
@@ -21,55 +21,52 @@ public class RBTester {
         }
 
 	// Read instructions until there are no more.
-	int line = 0;
-	while (sc.hasNext()) {
-
-	    line = line + 1;
-	    int    value = 0;
-	    try {
-		value = sc.nextInt();
-	    } catch (InputMismatchException e) {
-		System.err.printf("ERROR: Could not read value on line %d\n", line);
-		System.exit(1);
-	    }
+        int line = 0;
+        while (sc.hasNext()) {
+            line = line + 1;
+            int    value = 0;
+            try {
+            value = sc.nextInt();
+            } catch (InputMismatchException e) {
+            System.err.printf("ERROR: Could not read value on line %d\n", line);
+            System.exit(1);
+            }
             String  color = sc.next();
             boolean red   = false;;
             if (color.equalsIgnoreCase("red")) {
                 red = true;
-            } else if (!color.equalsIgnoreCase("black")) {
+            } 
+            else if (!color.equalsIgnoreCase("black")) {
                 System.err.printf("ERROR: Unknown color %s on line %d\n", color, line);
                 System.exit(1);
             }
-            
+                
             rbt.insert(value, red);
-            
-	}
+                
+        }
 
         System.out.printf("Is it valid? %b\n", isRBTree(rbt));
-
     }
 
     
     private static void showUsageAndExit () {
-	
-	System.err.printf("USAGE: java RBTester <input pathname>\n");
-	System.exit(1);
-
+        System.err.printf("USAGE: java RBTester <input pathname>\n");
+        System.exit(1);
     }
 
 
     private static boolean isRBTree (RedBlackTree<Integer> rbt) {
 
-	RBNode<Integer> root = rbt.root;
+	    RBNode<Integer> root = rbt.root;
         // COMPLETE THIS METHOD.  YOU MAY/SHOULD USE HELPER METHODS.
 
         if(checkRoot(root) == true && 
-        childofRedisBlack(root) == true && 
-        checkLeafisBlack(root) == true &&
-        blackHeight(root) == 0){
+        childofRedisBlack(root) == true && //not working
+        checkLeafisBlack(root) == true && 
+        bheight(root.right) == bheight(root.right) //not working
+        ){
             return true;
         }
-
         else{
             return false;
         }
@@ -78,6 +75,7 @@ public class RBTester {
     private static boolean checkRoot(RBNode<Integer> root){
         if(root.red!= true){
             //if it is false, that means the root is black
+            System.out.println("checkRoot");
             return true;
         }
         else{
@@ -85,21 +83,23 @@ public class RBTester {
         }
     }
 
-    private static boolean childofRedisBlack(RBNode<Integer> root){
-        if(root.red == true){
+    private static boolean childofRedisBlack(RBNode<Integer> node){
+        if((node.red == true) && (node.left.red != true) && (node.right.red != true)){
             //this node is red
-            if((root.left.red != true) && (root.right.red != true)){
-                return true;
-            }
+            System.out.println("childofredisblack");
+            // childofRedisBlack(node.left);
+            // childofRedisBlack(node.right);
+            return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
-    private static boolean checkLeafisBlack(RBNode<Integer> node)
-    {
-    /*if the root is null, dont return false, 
-    cehck if its red or black then cehck if 
-    kids are null, if they are, check if red or black*/
+    private static boolean checkLeafisBlack(RBNode<Integer> node){
+        /*if the root is null, dont return false, 
+        cehck if its red or black then cehck if 
+        kids are null, if they are, check if red or black*/
       
         // If node is null, return
         // if (node == null){
@@ -111,8 +111,9 @@ public class RBTester {
         // If node is leaf node, check that its black
         if (node.left == null && node.right == null)
         {   
-            if(node.left.red!= true && node.right.red!= true){
+            if(node.isNullLeaf()){
                 //if it is false, that means the leaf is black
+                System.out.println("checkleafisblack");
                 return true;
             }
         }
@@ -132,60 +133,27 @@ public class RBTester {
     
     }
 
-    // private static boolean rootToLeaf(RBNode<Integer> node){
-    //     if (node == null) {
-    //         return false;
-    //     }
-    //     if(heightLeft == heightRight)
-    //     return true;
-    // }
+    //the black height from root to node function not working
+    /*
+     * while temp is black?
+     * start at the leaf.
+     * if the parrent is black, add one.
+     * make the parent the new temp
+     * then run the function again at the new temp
+     * after this, save the answer for this one path, 
+     * compare it with the other paths in the tree
+     * and stop when the heights change
+     */
 
-    // private static int blackHeight(RBNode<Integer> node){
-    //     if (node.red == false){
-    //         height++;
-    //     }
-    //     if (node.left != null){
-    //         heightLeft = blackHeight(node.left);
-    //     }
-    //     else{
-    //         heightLeft = 1;
-    //     }
-    //     if (node.right != null){
-    //         heightRight = blackHeight(node.right);
-    //     }
-    //     else{
-    //         heightRight = 1;
-    //     }
-    //     // if (heightLeft != heightRight)
-    //     //     //YOU HAVE A PROBLEM!
-    //     height += heightLeft;
-    //     return height;
-    // }
-
-    private static int blackHeight(RBNode<Integer> root) {
-        if (root == null)
-            return blackheight; 
-
-        if (root.red == false) {
-            blackheight ++;
-
-        } 
-        // else {
-        //     root.black_count = root.parent.black_count;
-        // }
-        if ((root.left == null) && (root.right == null)) {              
-            blackheight ++;            
-        }               
-        // blackHeight(root.left);
-        // blackHeight(root.right);
-        if(blackHeight(root.left) == blackHeight(root.right)){
-            return 0;
+    private static int bheight(RBNode<Integer> node){
+        while(node.isNullLeaf() == false){
+            if(node.red != true){
+                blackheight++;
+            }
+            bheight(node.left);
         }
-        else{
-            return -1;
-        }
-    } 
-
+        return blackheight;
+    }
 
 //true is red, false is black
 

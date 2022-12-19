@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 //import java.util.*;
 public class BinarySearchTree<K extends Comparable<K>, V> {
     Node<K,V> root;
@@ -129,6 +131,20 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         inOrderTraverseRecursive(temp);
     }
 
+    public void trav(Node<K,V> node) {
+        Stack <Node<K,V>> s = new Stack();
+        while(!s.isEmpty() || node != null){
+            if(node != null){
+                s.push(node);
+                node = node.left;
+            }
+            else{
+                Node <K,V> temp = s.pop();
+                System.out.print(temp.key);
+                node = temp.right;
+            }
+        }
+    }
 
     private void inOrderTraverseRecursive(Node<K,V> temp) {
         if (temp == null){
@@ -160,13 +176,15 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
         System.out.println();
         System.out.println("Lookup: " + bst.lookup(3));
         System.out.println("Lookup: " + bst.lookup(14));
-        System.out.println("Remove: " + bst.delete(7));
-        System.out.println("Remove: " + bst.delete(12));
+        // System.out.println("Remove: " + bst.delete(7));
+        // System.out.println("Remove: " + bst.delete(12));
         bst.inOrderTraverse();
         System.out.println();
         System.out.println("bst root: " + bst.root.key);
-        bst.add(4,97);
-        System.out.println("Lookup: " + bst.lookup(4));
+        // bst.add(4,97);
+        // System.out.println("Lookup: " + bst.lookup(4));
+        System.out.println("trav");
+        bst.trav(bst.root);
 
     }
 }
